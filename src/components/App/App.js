@@ -1,12 +1,13 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(true);
   return (
     <div className="page">
-      <Header/>
+      <Header loggedIn={loggedIn}/>
       <Main/>
     </div>
   );

@@ -3,14 +3,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import iconLogo from '../../images/logo.svg';
 import Navigation from "../Navigation/Navigation";
+import ProfileMenu from "../ProfileMenu/ProfileMenu";
 
-function Header() {
+function Header({loggedIn}) {
   return (
     <header className="header">
       <Link to={'/'}>
         <img src={iconLogo} alt="Логотип. Переход к главной странице."/>
       </Link>
-      <Navigation />
+      {loggedIn && <Navigation />}
+      <ProfileMenu loggedIn={loggedIn}/>
     </header>
   );
 }

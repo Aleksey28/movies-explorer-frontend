@@ -1,0 +1,27 @@
+.navigation {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 16px;
+  align-items: center;
+}
+
+.navigation__item {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 18px;
+  text-align: right;
+  text-decoration: none;
+  color: #fff;
+  transition: opacity ease-in-out .2s;
+}
+.navigation__item:hover {
+  opacity: .7;
+}
+
+.navigation__item_active {
+  font-weight: 500;
+}
