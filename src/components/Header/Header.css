@@ -25,7 +25,7 @@
   gap: 30px;
 }
 
-.header__btn {
+.header__link {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -38,20 +38,28 @@
   color: #fff;
 }
 
-.header__btn:hover {
+.header__link:hover {
   opacity: 0.7;
 }
 
-.header__btn_type_signin {
+.header__link_type_signin {
   display: flex;
   justify-content: center;
   padding: 8px 20px;
   color: #000;
   border-radius: 3px;
-  background: #3DDC84;
+  background: #3ddc84;
 }
 
-.header__btn_type_signin:hover {
+.header__link_type_signin:hover {
+  opacity: .8;
+}
+
+.header__switch-menu {
+  display: none;
+}
+
+.header__switch-menu:hover {
   opacity: .8;
 }
 
@@ -61,8 +69,27 @@
     min-width: calc(320px - 14px * 2);
     max-width: calc(768px - 30px * 2);
   }
-  .header__btn_type_signin {
-    padding: calc((100vw - 320px) / (768 - 320) * (8 - 5) + 5px)  calc((100vw - 320px) / (768 - 320) * (20 - 12) + 12px);
+
+  .header__link_type_signin {
+    padding: calc((100vw - 320px) / (768 - 320) * (8 - 5) + 5px) calc((100vw - 320px) / (768 - 320) * (20 - 12) + 12px);
+  }
+
+  .header__switch-menu {
+    position: absolute;
+    right: 0;
+    display: block;
+    width: calc((100vw - 320px) / (768 - 320) * (44 - 40) + 40px);
+    height: calc((100vw - 320px) / (768 - 320) * (44 - 43) + 43px);
+    background: url('../../images/switch.svg') center no-repeat;
+    background-size: cover;
+    border: none;
+    transition: opacity ease-in-out .2s;
+    cursor: pointer;
+    padding: 0;
+  }
+  .header__switch-menu_opened {
+    background: url('../../images/close.svg') center no-repeat;
+    background-size: cover;
   }
 }
 
@@ -72,7 +99,8 @@
     min-width: 0;
     max-width: calc(320px - 14px * 2);
   }
-  .header__btn {
+
+  .header__link {
     font-size: 10px;
   }
 }

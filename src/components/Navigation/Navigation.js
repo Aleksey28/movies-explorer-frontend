@@ -5,7 +5,7 @@ import ProfileIcon from "../../images/profile.svg";
 
 function Navigation() {
   return (
-    <ul className="navigation">
+    <ul className="navigation navigation_hidden">
       <li className="navigation__item">
         <NavLink className="navigation__link" activeClassName="navigation__link_active" to={"/"}>Главная</NavLink>
       </li>
