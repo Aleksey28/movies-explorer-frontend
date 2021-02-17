@@ -1,9 +1,78 @@
 .header {
+  position: relative;
   display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-  max-width: 1280px;
-  width: 100%;
-  padding: 21px 70px;
+  align-items: center;
+  width: calc(100% - 70px * 2);
+  min-width: calc(768px - 30px * 2);
+  max-width: calc(1280px - 70px * 2);
+  height: 38px;
+  padding: 21px 0;
 }
 
+.header__logo {
+  position: absolute;
+  left: 0;
+}
+
+.header__auth {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 30px;
+}
+
+.header__btn {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  transition: opacity ease-in-out .2s;
+  text-decoration: none;
+  color: #fff;
+}
+
+.header__btn:hover {
+  opacity: 0.7;
+}
+
+.header__btn_type_signin {
+  display: flex;
+  justify-content: center;
+  padding: 8px 20px;
+  color: #000;
+  border-radius: 3px;
+  background: #3DDC84;
+}
+
+.header__btn_type_signin:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    width: calc(100% - 30px * 2);
+    min-width: calc(320px - 14px * 2);
+    max-width: calc(768px - 30px * 2);
+  }
+  .header__btn_type_signin {
+    padding: calc((100vw - 320px) / (768 - 320) * (8 - 5) + 5px)  calc((100vw - 320px) / (768 - 320) * (20 - 12) + 12px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    width: calc(100% - 14px * 2);
+    min-width: 0;
+    max-width: calc(320px - 14px * 2);
+  }
+  .header__btn {
+    font-size: 10px;
+  }
+}
