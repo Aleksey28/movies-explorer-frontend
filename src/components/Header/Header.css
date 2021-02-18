@@ -1,4 +1,16 @@
 .header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.header_type_public {
+  background-color: #073042;
+}
+
+.header__top {
   position: relative;
   display: flex;
   align-items: center;
@@ -61,6 +73,66 @@
   opacity: .8;
 }
 
+.header__bottom {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 75px 70px 25px;
+}
+
+.header__description {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  position: relative;
+}
+
+.header__title {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 50px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 58px;
+  margin: 0 0 36px;
+  color: #fff;
+  max-width: 640px;
+}
+
+.header__subtitle {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 16px;
+  margin: 0 0 146px;
+  opacity: 0.5;
+  color: #fff;
+  mix-blend-mode: normal;
+  max-width: 310px;
+}
+
+.header__show-more {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 16px;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  text-decoration: none;
+  opacity: 0.6;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 3px;
+}
+
+.header__image {
+  object-position: top;
+  object-fit: contain;
+}
+
 @media screen and (max-width: 768px) {
   .header__logo {
     left: calc((100vw - 320px) / (768 - 320) * (30 - 14) + 14px);
@@ -80,13 +152,14 @@
     display: block;
     width: calc((100vw - 320px) / (768 - 320) * (44 - 40) + 40px);
     height: calc((100vw - 320px) / (768 - 320) * (44 - 43) + 43px);
+    padding: 0;
+    cursor: pointer;
+    transition: opacity ease-in-out .2s;
+    border: none;
     background: url('../../images/switch.svg') center no-repeat;
     background-size: cover;
-    border: none;
-    transition: opacity ease-in-out .2s;
-    cursor: pointer;
-    padding: 0;
   }
+
   .header__switch-menu_opened {
     background: url('../../images/close.svg') center no-repeat;
     background-size: cover;
