@@ -2,21 +2,19 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: calc(100% - 70px * 2);
-  min-width: calc(768px - 30px * 2);
-  max-width: calc(1280px - 70px * 2);
+  width: 100%;
   height: 38px;
   padding: 21px 0;
 }
 
 .header__logo {
   position: absolute;
-  left: 0;
+  left: calc((100vw - 768px) / (1280 - 768) * (70 - 30) + 30px);
 }
 
 .header__auth {
   position: absolute;
-  right: 0;
+  right: calc((100vw - 768px) / (1280 - 768) * (70 - 30) + 30px);
   display: flex;
   align-items: center;
   margin: 0;
@@ -64,10 +62,12 @@
 }
 
 @media screen and (max-width: 768px) {
-  .header {
-    width: calc(100% - 30px * 2);
-    min-width: calc(320px - 14px * 2);
-    max-width: calc(768px - 30px * 2);
+  .header__logo {
+    left: calc((100vw - 320px) / (768 - 320) * (30 - 14) + 14px);
+  }
+
+  .header__auth {
+    right: calc((100vw - 320px) / (768 - 320) * (30 - 14) + 14px);
   }
 
   .header__link_type_signin {
@@ -76,7 +76,7 @@
 
   .header__switch-menu {
     position: absolute;
-    right: 0;
+    right: calc((100vw - 320px) / (768 - 320) * (30 - 14) + 14px);
     display: block;
     width: calc((100vw - 320px) / (768 - 320) * (44 - 40) + 40px);
     height: calc((100vw - 320px) / (768 - 320) * (44 - 43) + 43px);
@@ -94,12 +94,6 @@
 }
 
 @media screen and (max-width: 320px) {
-  .header {
-    width: calc(100% - 14px * 2);
-    min-width: 0;
-    max-width: calc(320px - 14px * 2);
-  }
-
   .header__link {
     font-size: 10px;
   }

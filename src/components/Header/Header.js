@@ -16,7 +16,7 @@ function Header({ loggedIn }) {
       </Link>
       {loggedIn
        ? <>
-         <Navigation/>
+         <Navigation openNavigation={openNavigation}/>
          <button className={`header__switch-menu ${openNavigation && 'header__switch-menu_opened'}`} onClick={handleClickOnNavSwitch}/>
        </>
        : <ul className="header__auth">
