@@ -6,6 +6,7 @@ import Promo from "../Promo/Promo";
 import { Route } from "react-router";
 import AboutProject from "../AboutProject/AboutProject";
 import Techs from "../Techs/Techs";
+import AboutMe from "../AboutMe/AboutMe";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,6 +24,9 @@ function App() {
         </div>
         <div className="page__container page__container_color_gray">
           <Techs/>
+        </div>
+        <div className="page__container page__container_color_black">
+          <AboutMe/>
         </div>
       </Route>
       <Main/>
