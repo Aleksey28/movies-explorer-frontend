@@ -1,0 +1,92 @@
+.about-project {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1280px;
+  padding: 110px 70px;
+}
+
+.about-project__title {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 27px;
+  margin: 0 0 70px;
+  padding-bottom: 23px;
+  letter-spacing: -0.04em;
+  color: #fff;
+  border-bottom: #dadada solid 1px;
+}
+
+.table {
+  display: flex;
+  margin: 0 0 110px;
+  padding: 0;
+  list-style-type: none;
+  gap: 40px;
+}
+
+.table__heading {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  margin: 0 0 26px;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+.table__text {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 20px;
+  margin: 0;
+  color: #fff;
+}
+
+.time-line {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.time-line__number {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  margin: 0;
+}
+
+.time-line__number_weeks_1 {
+  color: #000;
+  background: #3ddc84;
+}
+
+.time-line__number_weeks_4 {
+  color: #fff;
+  background: #303030;
+}
+
+.time-line__description {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 17px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 14px;
+  text-align: center;
+  color: #8b8b8b;
+}

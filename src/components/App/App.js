@@ -4,6 +4,7 @@ import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Promo from "../Promo/Promo";
 import { Route } from "react-router";
+import AboutProject from "../AboutProject/AboutProject";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -11,10 +12,16 @@ function App() {
     <div className="page">
       <div className={`page__container ${!loggedIn && "page__container_color_blue"}`}>
         <Header loggedIn={loggedIn}/>
-        <Route exact path="/">
-          <Promo/>
-        </Route>
       </div>
+      <Route exact path="/">
+        <div className='page__container page__container_color_blue'>
+          <Promo/>
+        </div>
+        <div className="page__container page__container_color_black">
+          <AboutProject/>
+        </div>
+      </Route>
+
       <Main/>
     </div>
   );

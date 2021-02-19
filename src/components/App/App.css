@@ -5,6 +5,8 @@
   min-width: 320px;
   height: 100vh;
   background-color: #202020;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 .page__container {
@@ -17,3 +19,8 @@
 .page__container_color_blue {
   background-color: #073042;
 }
+
+.page__container_color_black {
+  background-color: #202020;
+}
+
