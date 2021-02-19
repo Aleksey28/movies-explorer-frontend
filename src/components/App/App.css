@@ -2,7 +2,18 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  min-width: 320px;
   height: 100vh;
   background-color: #202020;
-  min-width: 320px;
+}
+
+.page__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.page__container_color_blue {
+  background-color: #073042;
 }
