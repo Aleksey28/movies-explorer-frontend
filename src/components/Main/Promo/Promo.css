@@ -69,13 +69,13 @@
 }
 
 .promo__image {
-  object-position: center;
-  object-fit: cover;
   width: 310px;
   height: 310px;
-  animation: rotation 30s linear infinite normal;
-  transition: opacity ease-in-out .2s;
   cursor: pointer;
+  transition: opacity ease-in-out .2s;
+  animation: rotation 30s linear infinite normal;
+  object-position: center;
+  object-fit: cover;
 }
 
 .promo__image:hover {

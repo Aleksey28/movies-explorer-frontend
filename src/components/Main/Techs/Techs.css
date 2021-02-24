@@ -1,13 +1,3 @@
-.techs {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 1280px;
-  padding: 110px 70px;
-}
-
 .techs__title {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 22px;
@@ -61,6 +51,9 @@
   font-weight: normal;
   font-style: normal;
   line-height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 90px;
   height: 60px;
   text-align: center;
@@ -68,7 +61,4 @@
   color: #fff;
   border-radius: 10px;
   background: #303030;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
