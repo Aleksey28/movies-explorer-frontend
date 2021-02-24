@@ -3,14 +3,15 @@ import Avatar from "../../../images/avatar.jpg";
 import "./AboutMe.css";
 
 function AboutMe() {
+  const currentDate = new Date();
   return (
     <section className="about-me main__section main__section_pv_110">
       <h2 className="about-me__title main__section-title main__section-title_mb_66">Студент</h2>
       <p className="about-me__name">Алексей</p>
-      <p className="about-me__profession">Фронтенд-разработчик, {(new Date).getFullYear() - 1995} лет</p>
+      <p className="about-me__profession">Фронтенд-разработчик, {currentDate.getFullYear() - 1995} лет</p>
       <p className="about-me__description">
-        Я родился в Удмуртии и сейчас живу в Ижевске. Получить высшее образование в ИжГТУ на факультете ИВТ. На данный момент собираюсь переезжать в Санкт-Петербург.
-        До фронтунда 4 года работал 1С программистом.
+        Я родился в Удмуртии и сейчас живу в Ижевске. Получил высшее образование в ИжГТУ на факультете ИВТ. На данный момент собираюсь переезжать в Санкт-Петербург.
+        До фронтенда 4 года работал 1С программистом.
         Регулярно занимаюсь самообразованием и освоением нового материала. На данный момент подписан и читаю журнал "КОД" от Яндекс.Практикума,
         смотрю на ютубе серии уроков по React на канале IT-KAMASUTRA, читаю книгу "Грокаем алгоритмы" и еще регулярно занимаюсь английским на платформе SkyEng,
         а также учусь играть на гитаре =)
