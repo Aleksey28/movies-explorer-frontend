@@ -8,6 +8,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.page_bg_blue {
+.page__container {
+  width: 100%;
+  border: none;
+}
+
+.page__container_color_blue {
   background-color: #073042;
 }
