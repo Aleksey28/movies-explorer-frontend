@@ -1,10 +1,11 @@
 import React from "react";
 import Avatar from "../../../images/avatar.jpg";
+import "./AboutMe.css";
 
 function AboutMe() {
   return (
-    <dev className="about-me">
-      <h2 className="main__section-title main__section-title_mb_66">Студент</h2>
+    <section className="about-me main__section main__section_pv_110">
+      <h2 className="about-me__title main__section-title main__section-title_mb_66">Студент</h2>
       <p className="about-me__name">Алексей</p>
       <p className="about-me__profession">Фронтенд-разработчик, {(new Date).getFullYear() - 1995} лет</p>
       <p className="about-me__description">
@@ -36,7 +37,7 @@ function AboutMe() {
         </li>
       </ul>
       <img src={Avatar} alt="Фотография создателя." className="about-me__avatar"/>
-    </dev>
+    </section>
   );
 }
 

@@ -18,7 +18,7 @@ function Main() {
         <Techs/>
       </div>
       <div className="main__container main__container_color_black">
-        {/*<AboutMe/>*/}
+        <AboutMe/>
       </div>
     </main>
   );
