@@ -7,9 +7,10 @@ import Footer from "../Footer/Footer";
 import Error from "../Error/Error";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import Profile from "../Profile/Profile";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   return (
     <div className="page">
       <Switch>
@@ -29,7 +30,15 @@ function App() {
           <Route exact path="/">
             <Main/>
           </Route>
-          <Footer/>
+          <Route path="/profile">
+            <Profile/>
+          </Route>
+          <Switch>
+            <Route path="/profile"/>
+            <Route path="/">
+              <Footer/>
+            </Route>
+          </Switch>
         </Route>
       </Switch>
     </div>

@@ -1,3 +1,10 @@
+export const propsProfile = {
+  inputsList: [
+    { name: "name", label: "Имя", type: "text", value: "Виталий" },
+    { name: "email", label: "Почта", type: "text", value: "pochta@yandex.ru" },
+  ],
+};
+
 export const propsAuthLogIn = {
   inputsList: [
     { name: "email", label: "E-mail", type: "text" },
@@ -10,7 +17,7 @@ export const propsAuthLogIn = {
     description: "Ещё не зарегистрированы?",
     linkTo: "/signup",
     linkText: "Регистрация",
-  }
+  },
 };
 
 export const propsAuthRegister = {
@@ -26,5 +33,5 @@ export const propsAuthRegister = {
     description: "Уже зарегистрированы?",
     linkTo: "/signin",
     linkText: "Войти",
-  }
+  },
 };
