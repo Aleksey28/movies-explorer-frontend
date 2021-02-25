@@ -9,27 +9,27 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <div className="page">
       <Switch>
         <Route path="/error">
           <Error/>
         </Route>
+        <Route path="/signin">
+          <Login/>
+        </Route>
+        <Route path="/signup">
+          <Register/>
+        </Route>
         <Route path="/">
+          <div className={`page__container ${!loggedIn && "page__container_color_blue"}`}>
+            <Header loggedIn={loggedIn}/>
+          </div>
           <Route exact path="/">
-            <div className={`page__container ${!loggedIn && "page__container_color_blue"}`}>
-              <Header loggedIn={loggedIn}/>
-            </div>
             <Main/>
-            <Footer/>
           </Route>
-          <Route path="/signin">
-            <Login/>
-          </Route>
-          <Route path="/signup">
-            <Register/>
-          </Route>
+          <Footer/>
         </Route>
       </Switch>
     </div>
