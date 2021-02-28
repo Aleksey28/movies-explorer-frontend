@@ -40,6 +40,87 @@ export const cards = [
     },
     saved: true,
   },
+  {
+    id: 5,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
+  {
+    id: 6,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
+  {
+    id: 7,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
+  {
+    id: 8,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
+  {
+    id: 9,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
+  {
+    id: 10,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
+  {
+    id: 11,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
+  {
+    id: 12,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
+  {
+    id: 13,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: false,
+  },
 ];
 
 export const propsProfile = {
