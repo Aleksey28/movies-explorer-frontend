@@ -1,3 +1,47 @@
+import card1 from "../images/card1.jpg";
+import card2 from "../images/card2.jpg";
+import card3 from "../images/card3.jpg";
+import card4 from "../images/card4.jpg";
+
+export const cards = [
+  {
+    id: 1,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card1,
+    },
+    saved: false,
+  },
+  {
+    id: 2,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card2,
+    },
+    saved: false,
+  },
+  {
+    id: 3,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card3,
+    },
+    saved: true,
+  },
+  {
+    id: 4,
+    nameRU: "В погоне за Бенкси",
+    duration: 27 * 60,
+    image: {
+      url: card4,
+    },
+    saved: true,
+  },
+];
+
 export const propsProfile = {
   inputsList: [
     { name: "name", label: "Имя", type: "text", value: "Виталий" },
