@@ -2,15 +2,18 @@ import "./App.css";
 import React, { useState } from "react";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
-import { Route, Switch } from "react-router";
+import { Route, Switch, useLocation } from "react-router";
 import Footer from "../Footer/Footer";
 import Error from "../Error/Error";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
+import Movies from "../Movies/Movies";
+import { cards } from "../../utils/constants";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
+  const {pathname} = useLocation();
   return (
     <div className="page">
       <Switch>
@@ -24,11 +27,17 @@ function App() {
           <Register/>
         </Route>
         <Route path="/">
-          <div className={`page__container ${!loggedIn && "page__container_color_blue"}`}>
+          <div className={`page__container ${pathname === '/' && "page__container_color_blue"}`}>
             <Header loggedIn={loggedIn}/>
           </div>
           <Route exact path="/">
             <Main/>
+          </Route>
+          <Route path="/movies">
+            <Movies cards={cards}/>
+          </Route>
+          <Route path="/saved-movies">
+            <Movies cards={cards.filter(item => item.saved)}/>
           </Route>
           <Route path="/profile">
             <Profile/>
