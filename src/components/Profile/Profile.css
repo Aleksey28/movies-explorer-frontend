@@ -1,12 +1,12 @@
 .profile {
   display: flex;
   align-items: center;
+  flex: 1 0 auto;
   flex-direction: column;
   box-sizing: border-box;
   width: calc(100% - 30px * 2);
   max-width: 410px;
   margin: auto;
-  flex: 1 0 auto;
   padding: 74px 0 70px;
 }
 
@@ -86,11 +86,11 @@
   line-height: 16px;
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
   text-align: center;
   color: #fff;
   border: none;
   background: none;
-  margin-bottom: 16px;
 }
 
 .profile__btn:last-of-type {
