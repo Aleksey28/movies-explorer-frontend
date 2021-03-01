@@ -1,6 +1,7 @@
 .navigation {
   height: 100%;
   margin: auto;
+  z-index: 1;
 }
 
 .navigation__list {

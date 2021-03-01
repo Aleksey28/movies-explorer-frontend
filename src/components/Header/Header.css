@@ -57,6 +57,7 @@
 
 .header__switch-menu {
   display: none;
+  z-index: 1;
 }
 
 .header__switch-menu:hover {
