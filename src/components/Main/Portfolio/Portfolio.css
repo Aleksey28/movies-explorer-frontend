@@ -57,3 +57,40 @@
   letter-spacing: -0.04em;
   color: #fff;
 }
+
+@media screen and (max-width: 768px) {
+
+  .portfolio {
+    padding-bottom: 90px;
+  }
+
+  .portfolio__name {
+    font-size: 28px;
+  }
+
+  .portfolio__icon {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+  .portfolio {
+    padding-bottom: 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__name {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__icon {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
