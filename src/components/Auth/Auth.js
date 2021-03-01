@@ -12,11 +12,11 @@ function Auth({
 }) {
 
   const fieldList = inputsList.map(item => (
-      <>
+      <div key={`${name}-${item.name}`} className="auth__field">
         <label htmlFor={item.name} className="auth__label"> {item.label} </label>
-        <input key={`${name}-${item.name}`} className="auth__input" {...item}/>
+        <input className="auth__input" {...item}/>
         <span className="auth__error">Что-то пошло не так....</span>
-      </>
+      </div>
     ),
   );
   return (
