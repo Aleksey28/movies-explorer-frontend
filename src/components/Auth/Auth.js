@@ -26,7 +26,7 @@ function Auth({
       <fieldset className="auth__fieldList">
         {fieldList}
       </fieldset>
-      <buttom className="auth__submit">{submitText}</buttom>
+      <button className="auth__submit">{submitText}</button>
       <div className="auth__footer">
         <p className="auth__description">{footerData.description}</p>
         <Link to={footerData.linkTo} className="auth__link">{footerData.linkText}</Link>
