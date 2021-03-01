@@ -122,6 +122,11 @@
 }
 
 @media screen and (min-width: 401px) and (max-width: 768px) {
+
+  .auth {
+    padding: 232px 0;
+  }
+
   .auth__submit {
     font-size: 14px;
     line-height: 17px;
@@ -138,7 +143,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 400px) {
   .auth {
     align-items: center;
   }
