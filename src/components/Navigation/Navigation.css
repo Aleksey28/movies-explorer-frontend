@@ -14,6 +14,10 @@
   gap: 16px;
 }
 
+.navigation__item_visible-in-bar {
+  display: none;
+}
+
 .navigation__link {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 13px;
@@ -89,6 +93,10 @@
 
   .navigation__list_opened {
     width: 520px;
+  }
+
+  .navigation__item_visible-in-bar {
+    display: block;
   }
 
   .navigation__link {
