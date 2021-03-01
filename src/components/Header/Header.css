@@ -106,7 +106,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .header__link {
     font-size: 10px;
   }
