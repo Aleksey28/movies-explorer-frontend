@@ -5,8 +5,8 @@ import "./AboutMe.css";
 function AboutMe() {
   const currentDate = new Date();
   return (
-    <section className="about-me main__section main__section_pv_110">
-      <h2 className="about-me__title main__section-title main__section-title_mb_66">Студент</h2>
+    <section className="about-me main__section main__section_pv_big">
+      <h2 className="about-me__title main__section-title main__section-title_mb_small">Студент</h2>
       <p className="about-me__name">Алексей</p>
       <p className="about-me__profession">Фронтенд-разработчик, {currentDate.getFullYear() - 1995} лет</p>
       <p className="about-me__description">
