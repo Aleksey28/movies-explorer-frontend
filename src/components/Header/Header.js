@@ -1,8 +1,8 @@
 import "./Header.css";
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import iconLogo from "../../images/logo.svg";
+import { NavLink } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
+import Logo from "../Logo/Logo";
 
 function Header({ loggedIn }) {
   const [openNavigation, setOpenNavigation] = useState(false);
@@ -11,9 +11,7 @@ function Header({ loggedIn }) {
   };
   return (
     <header className="header">
-      <Link className="header__logo" to={"/"}>
-        <img src={iconLogo} alt="Логотип. Переход к главной странице."/>
-      </Link>
+      <Logo elementClass="header__logo"/>
       {loggedIn
        ? <>
          <Navigation openNavigation={openNavigation}/>

@@ -12,7 +12,7 @@ import Movies from "../Movies/Movies";
 import { cards } from "../../utils/constants";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const {pathname} = useLocation();
   return (
     <div className="page">
