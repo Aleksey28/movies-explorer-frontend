@@ -13,12 +13,12 @@
   font-weight: normal;
   font-style: normal;
   line-height: 16px;
+  box-sizing: border-box;
   margin: 0 0 20px;
   padding-bottom: 20px;
-  box-sizing: border-box;
-  border-bottom: 1px solid #424242;
   text-align: center;
   color: #8b8b8b;
+  border-bottom: 1px solid #424242;
 }
 
 .footer__row {
@@ -50,12 +50,58 @@
   font-weight: normal;
   font-style: normal;
   line-height: 16px;
-  text-align: right;
-  color: #fff;
-  text-decoration: none;
   transition: opacity ease-in .2s;
+  text-align: right;
+  text-decoration: none;
+  color: #fff;
 }
 
 .footer__link:hover {
   opacity: .7;
+}
+
+@media screen and (max-width: 1280px) {
+  .footer {
+    padding-right: calc((100vw - 768px) / (1280 - 768) * (70 - 50) + 50px);
+    padding-left: calc((100vw - 768px) / (1280 - 768) * (70 - 50) + 50px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding-right: calc((100vw - 400px) / (768 - 400) * (50 - 10) + 10px);
+    padding-left: calc((100vw - 400px) / (768 - 400) * (50 - 10) + 10px);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .footer__description {
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 30px;
+  }
+
+  .footer__row {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .footer__date {
+    font-size: 12px;
+    line-height: 15px;
+    order: 1;
+    color: #8b8b8b;
+  }
+
+  .footer__links {
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .footer__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }
