@@ -3,8 +3,8 @@ import "./AboutProject.css";
 
 function AboutProject() {
   return (
-    <section id="about-project" className="main__section main__section_pv_110">
-      <h2 className="main__section-title main__section-title_mb_70">О проекте</h2>
+    <section id="about-project" className="main__section main__section_pv_big">
+      <h2 className="main__section-title main__section-title_mb_middle">О проекте</h2>
       <ul className="table">
         <li className="table__cell">
           <p className="table__heading">Дипломный проект включал 5 этапов</p>
@@ -16,8 +16,8 @@ function AboutProject() {
         </li>
       </ul>
       <div className="time-line">
-        <p className="time-line__number time-line__number_weeks_1">1 неделя</p>
-        <p className="time-line__number time-line__number_weeks_4">4 недели</p>
+        <p className="time-line__number">1 неделя</p>
+        <p className="time-line__number">4 недели</p>
         <p className="time-line__description">Back-end</p><p className="time-line__description">Front-end</p>
       </div>
     </section>

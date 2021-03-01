@@ -46,12 +46,12 @@
   margin: 0;
 }
 
-.time-line__number_weeks_1 {
+.time-line__number:nth-of-type(2n+1) {
   color: #000;
   background: #3ddc84;
 }
 
-.time-line__number_weeks_4 {
+.time-line__number:nth-of-type(2n+2) {
   color: #fff;
   background: #303030;
 }
@@ -67,4 +67,53 @@
   padding: 14px;
   text-align: center;
   color: #8b8b8b;
+}
+
+@media screen and (max-width: 768px) {
+  .table {
+    margin: 0 0 93px;
+    gap: 30px;
+  }
+
+  .table__heading {
+    margin: 0 0 22px;
+  }
+
+  .table__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .table {
+    flex-direction: column;
+    margin: 0 0 60px;
+    gap: 58px;
+  }
+
+  .table__heading {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 16px;
+  }
+
+  .table__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .time-line__number {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .time-line__description {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .time-line {
+    grid-template-columns: minmax(100px, 2fr) minmax(184px, 3fr);
+  }
 }
