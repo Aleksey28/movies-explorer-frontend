@@ -5,4 +5,19 @@
   padding: 70px 0 0;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 32px 28px;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 24px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .cards {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
 }
