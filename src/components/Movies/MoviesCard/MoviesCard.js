@@ -7,8 +7,10 @@ function MoviesCard({ data }) {
   const { pathname } = useLocation();
   return (
     <div className="card">
-      <p className="card__title">{nameRU}</p>
-      <p className="card__time">{`${Math.floor(duration / 60)} минут`}</p>
+      <div className="card__header">
+        <p className="card__title">{nameRU}</p>
+        <p className="card__time">{`${Math.floor(duration / 60)} минут`}</p>
+      </div>
       <img src={image.url} alt="Изображение фильма." className="card__image"/>
       <button
         className={
