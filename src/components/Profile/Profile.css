@@ -16,7 +16,7 @@
   font-weight: 500;
   font-style: normal;
   line-height: 29px;
-  margin: 0 0 96px;
+  margin: 0 0 105px;
   text-align: center;
   color: #fff;
 }
@@ -106,11 +106,18 @@
   .profile {
     padding: 236px 0 269px;
   }
+  .profile__title {
+    margin-bottom: 78px;
+  }
 }
 
 @media screen and (max-width: 400px) {
   .profile {
-    padding: 70px 0 80px;
+    padding: 70px 0 40px;
+  }
+
+  .profile__title {
+    margin-bottom: 63px;
   }
 
   .profile__btn {
