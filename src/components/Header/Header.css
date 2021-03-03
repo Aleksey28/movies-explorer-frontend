@@ -111,6 +111,9 @@
   .header__switch-menu_opened {
     background: url('../../images/close.svg') center no-repeat;
     background-size: cover;
+    width: 30px;
+    right: 23px;
+    height: 30px;
   }
 }
 
@@ -140,5 +143,12 @@
   .header__switch-menu {
     right: 23px;
     width: 22px;
+  }
+
+  .header__switch-menu_opened {
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    top: 14px;
   }
 }
