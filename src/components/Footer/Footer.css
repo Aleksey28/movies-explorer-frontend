@@ -4,7 +4,7 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 1280px;
-  padding: 70px 70px 20px;
+  padding: 80px 70px 20px;
 }
 
 .footer__description {
@@ -68,15 +68,15 @@
 
 @media screen and (max-width: 1280px) {
   .footer {
-    padding-right: calc((100vw - 768px) / (1280 - 768) * (70 - 50) + 50px);
-    padding-left: calc((100vw - 768px) / (1280 - 768) * (70 - 50) + 50px);
+    padding-right: calc((100vw - 768px) / (1280 - 768) * (70 - 30) + 30px);
+    padding-left: calc((100vw - 768px) / (1280 - 768) * (70 - 30) + 30px);
   }
 }
 
 @media screen and (max-width: 768px) {
   .footer {
-    padding-right: calc((100vw - 400px) / (768 - 400) * (50 - 10) + 10px);
-    padding-left: calc((100vw - 400px) / (768 - 400) * (50 - 10) + 10px);
+    padding-right: calc((100vw - 400px) / (768 - 400) * (30 - 10) + 10px);
+    padding-left: calc((100vw - 400px) / (768 - 400) * (30 - 10) + 10px);
   }
 }
 

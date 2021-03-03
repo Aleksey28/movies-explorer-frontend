@@ -65,7 +65,7 @@ export const cards = [
     image: {
       url: card4,
     },
-    saved: false,
+    saved: true,
   },
   {
     id: 8,

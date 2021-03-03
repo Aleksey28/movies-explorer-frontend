@@ -1,16 +1,16 @@
 .card {
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   border-radius: 6px;
   background: #222;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  padding: 18px;
 }
 
 .card__header {
   display: flex;
   justify-content: space-between;
+  padding: 18px;
 }
 
 .card__title {
@@ -20,11 +20,11 @@
   font-style: normal;
   line-height: 18px;
   overflow: hidden;
+  width: calc(100% - 70px);
+  margin: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #fff;
-  width: calc(100% - 70px);
-  margin: 0 0 18px;
 }
 
 .card__time {
@@ -33,15 +33,14 @@
   font-weight: normal;
   font-style: normal;
   line-height: 18px;
+  margin: 0;
   color: #8b8b8b;
-  margin: 0 0 18px;
 }
 
 .card__image {
   width: 100%;
   object-position: center;
   object-fit: cover;
-  margin-bottom: 18px;
 }
 
 .card__btn {
@@ -52,7 +51,7 @@
   line-height: 11px;
   width: 100px;
   height: 29px;
-  margin: 0 auto;
+  margin: 18px auto;
   color: #fff;
   border: none;
   border-radius: 30px;
@@ -76,23 +75,21 @@
 }
 
 @media screen and (max-width: 400px) {
-  .card {
-    padding: 14px;
+  .card__header {
+    padding: 17px 13px;
   }
 
   .card__title {
     font-size: 12px;
     max-width: calc(100% - 50px);
-    margin-bottom: 14px;
   }
 
   .card__time {
     font-size: 10px;
     width: 50px;
-    margin-bottom: 14px;
   }
 
-  .card__image {
-    margin-bottom: 14px;
+  .card__btn {
+    margin: 13px auto;
   }
 }

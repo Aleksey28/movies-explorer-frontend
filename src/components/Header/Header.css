@@ -115,9 +115,19 @@
 }
 
 @media screen and (max-width: 400px) {
+
+  .header__logo {
+    left: 14px;
+  }
+
+  .header__auth {
+    right: 14px;
+  }
+
   .header__link {
     font-size: 10px;
   }
+
 
   .header__auth li {
     margin-right: 15px;
