@@ -9,7 +9,13 @@ function Auth({
   inputsList = [],
   submitText,
   footerData,
+  onSubmit,
 }) {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit();
+  };
 
   const fieldList = inputsList.map(item => (
       <div key={`${name}-${item.name}`} className="auth__field">
@@ -26,7 +32,7 @@ function Auth({
       <fieldset className="auth__fieldList">
         {fieldList}
       </fieldset>
-      <button className="auth__submit">{submitText}</button>
+      <button className="auth__submit" onClick={handleSubmit}>{submitText}</button>
       <div className="auth__footer">
         <p className="auth__description">{footerData.description}</p>
         <Link to={footerData.linkTo} className="auth__link">{footerData.linkText}</Link>

@@ -2,7 +2,7 @@ import { propsProfile } from "../../utils/constants";
 import React from "react";
 import "./Profile.css";
 
-function Profile() {
+function Profile({onSignOut}) {
 
   const fieldList = propsProfile.inputsList.map(item => (
       <div key={`profile-${item.name}`} className="profile__field">
@@ -20,7 +20,7 @@ function Profile() {
         {fieldList}
       </fieldset>
       <button className="profile__btn">Редактировать</button>
-      <button className="profile__btn profile__btn_type_exit">Выйти из аккаунта</button>
+      <button className="profile__btn profile__btn_type_exit" onClick={onSignOut}>Выйти из аккаунта</button>
     </form>
   );
 }

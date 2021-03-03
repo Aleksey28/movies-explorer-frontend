@@ -14,6 +14,15 @@ import { cards } from "../../utils/constants";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const {pathname} = useLocation();
+
+  const handleSignIn = () => {
+    setLoggedIn(true);
+  }
+
+  const handleSignOut = () => {
+    setLoggedIn(false);
+  }
+
   return (
     <div className="page">
       <Switch>
@@ -21,7 +30,7 @@ function App() {
           <Error/>
         </Route>
         <Route path="/signin">
-          <Login/>
+          <Login onSignIn={handleSignIn}/>
         </Route>
         <Route path="/signup">
           <Register/>
@@ -40,7 +49,7 @@ function App() {
             <Movies cards={cards.filter(item => item.saved)}/>
           </Route>
           <Route path="/profile">
-            <Profile/>
+            <Profile onSignOut={handleSignOut}/>
           </Route>
           <Switch>
             <Route path="/profile"/>
