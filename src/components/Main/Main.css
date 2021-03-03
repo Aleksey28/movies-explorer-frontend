@@ -119,11 +119,16 @@
     padding-left: 18px;
   }
 
-  .main__section-title_mb_middle, .main__section-title_mb_big {
+  .main__section_ph_small {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .main__section-title_mb_small, .main__section-title_mb_middle, .main__section-title_mb_big {
     margin-bottom: 60px;
   }
 
-  .main__section_pv_big {
+  .main__section_pv_big, .main__section_pv_small {
     padding-top: 70px;
     padding-bottom: 70px;
   }

@@ -6,7 +6,7 @@
   max-width: 1280px;
   height: 38px;
   margin: 0 auto;
-  padding: 21px 0 50px;
+  padding: 18px 0 18px;
 }
 
 .header__logo {
@@ -22,7 +22,14 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
-  gap: 30px;
+}
+
+.header__auth li {
+  margin-right: 30px;
+}
+
+.header__auth li:last-of-type {
+  margin-right: 0;
 }
 
 .header__link {
@@ -56,8 +63,8 @@
 }
 
 .header__switch-menu {
-  display: none;
   z-index: 1;
+  display: none;
 }
 
 .header__switch-menu:hover {
@@ -110,5 +117,13 @@
 @media screen and (max-width: 400px) {
   .header__link {
     font-size: 10px;
+  }
+
+  .header__auth li {
+    margin-right: 15px;
+  }
+
+  .header__auth li:last-of-type {
+    margin-right: 0;
   }
 }

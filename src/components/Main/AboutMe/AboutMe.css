@@ -70,6 +70,7 @@
   align-self: self-start;
   width: 100%;
   max-width: 300px;
+  margin-left: auto;
   border-radius: 10px;
   justify-self: center;
   object-fit: cover;
@@ -90,17 +91,23 @@
   .about-me__name {
     font-size: 40px;
     line-height: 40px;
+    margin-bottom: 13px;
   }
 
   .about-me__profession {
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-size: 12px;
     font-weight: 500;
+    margin-bottom: 18px;
   }
 
   .about-me__description {
     font-size: 12px;
     line-height: 18px;
+  }
+
+  .about-me__avatar {
+    max-width: 255px;
   }
 }
 
@@ -116,6 +123,7 @@
   }
 
   .about-me__avatar {
+    max-width: none;
     margin-bottom: 40px;
     grid-column-start: 1;
     grid-column-end: 2;

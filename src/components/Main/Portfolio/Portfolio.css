@@ -21,16 +21,25 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
-  gap: 20px;
+}
+
+.portfolio__item {
+  margin-bottom: 20px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #424242;
+}
+
+.portfolio__item:last-of-type {
+  margin-bottom: 0;
+  padding: 0;
+  border: none;
 }
 
 .portfolio__link {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 19px;
   transition: opacity ease-in-out .2s;
   text-decoration: none;
-  border-bottom: 1px solid #424242;
 }
 
 .portfolio__link:hover {
@@ -59,7 +68,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .portfolio {
     padding-bottom: 90px;
   }
@@ -74,7 +82,6 @@
 }
 
 @media screen and (max-width: 400px) {
-
   .portfolio {
     padding-bottom: 70px;
   }
@@ -82,6 +89,11 @@
   .portfolio__title {
     font-size: 14px;
     line-height: 20px;
+    margin-bottom: 40px;
+  }
+
+  .portfolio__item {
+    padding-bottom: 19px;
   }
 
   .portfolio__name {

@@ -52,16 +52,11 @@
 
 @media screen and (max-width: 1280px) {
   .techs__heading {
-    margin-bottom: calc((100vw - 768px) / (1280 - 768) * (26 - 23) + 23px);
+    margin-bottom: calc((100vw - 768px) / (1280 - 768) * (26 - 22) + 22px);
   }
 
   .techs__text {
     margin-bottom: calc((100vw - 768px) / (1280 - 768) * (100 - 83) + 83px);
-  }
-
-  .techs__text {
-    font-size: 12px;
-    line-height: 18px;
   }
 
   .techs__list {
@@ -72,6 +67,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .techs__heading {
+    margin-bottom: 22px;
+  }
+
   .techs__list {
     flex-wrap: wrap;
     justify-content: center;
@@ -98,6 +97,7 @@
   .techs__heading {
     font-size: 30px;
     line-height: 36px;
+    margin-bottom: 24px;
   }
 
   .techs__text {
