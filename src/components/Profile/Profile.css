@@ -87,10 +87,16 @@
   display: flex;
   align-items: center;
   margin-bottom: 16px;
+  cursor: pointer;
+  transition: opacity ease-in .2s;
   text-align: center;
   color: #fff;
   border: none;
   background: none;
+}
+
+.profile__btn:hover {
+  opacity: .7;
 }
 
 .profile__btn:last-of-type {
@@ -106,6 +112,7 @@
   .profile {
     padding: 236px 0 269px;
   }
+
   .profile__title {
     margin-bottom: 78px;
   }

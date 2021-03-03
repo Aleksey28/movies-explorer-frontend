@@ -1,16 +1,38 @@
 import { propsProfile } from "../../utils/constants";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 
-function Profile({onSignOut}) {
+function Profile({ onSignOut }) {
 
-  const fieldList = propsProfile.inputsList.map(item => (
-      <div key={`profile-${item.name}`} className="profile__field">
-        <label htmlFor={item.name} className="profile__label"> {item.label} </label>
-        <input className="profile__input" {...item}/>
-        <span className="profile__error">Что-то пошло не так....</span>
-      </div>
-    ),
+  const [inputsStates, setInputStates] = useState({});
+
+  useEffect(() => (
+    propsProfile.inputsList.forEach(item => {
+      setInputStates((prev => ({
+        ...prev,
+        [item.name]: item.value,
+      })));
+    })
+  ), []);
+
+  const handleChangeInput = (e) => {
+    setInputStates((prev => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    })));
+  };
+
+  const fieldList = propsProfile.inputsList.map(item => {
+
+      const value = inputsStates[item.name] || "";
+      return (
+        <div key={`profile-${item.name}`} className="profile__field">
+          <label htmlFor={item.name} className="profile__label"> {item.label} </label>
+          <input className="profile__input" value={value} onChange={handleChangeInput} {...item}/>
+          <span className="profile__error">Что-то пошло не так....</span>
+        </div>
+      );
+    },
   );
 
   return (
