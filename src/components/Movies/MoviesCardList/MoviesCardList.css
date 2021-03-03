@@ -15,7 +15,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .cards {
     grid-template-columns: 1fr;
     row-gap: 13px;
