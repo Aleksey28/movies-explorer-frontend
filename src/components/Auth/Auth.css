@@ -84,14 +84,20 @@
   font-weight: 500;
   font-style: normal;
   line-height: 15px;
-  margin-bottom: 16px;
+  width: 100%;
+  margin-bottom: 17px;
   padding: 14px 0;
+  cursor: pointer;
+  transition: opacity ease-in-out .2s;
   text-align: center;
   color: #fff;
   border: none;
   border-radius: 3px;
   background: #4285f4;
-  width: 100%;
+}
+
+.auth__submit:hover {
+  opacity: .8;
 }
 
 .auth__footer {
@@ -101,10 +107,10 @@
 
 .auth__description {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
   font-style: normal;
-  line-height: 15px;
+  line-height: 17px;
   margin: 0 6px 0 0;
   text-align: center;
   color: #8b8b8b;
@@ -112,17 +118,21 @@
 
 .auth__link {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
   font-style: normal;
-  line-height: 15px;
+  line-height: 17px;
+  transition: opacity ease-in-out .2s;
   text-align: center;
   text-decoration: none;
   color: #4285f4;
 }
 
-@media screen and (min-width: 401px) and (max-width: 768px) {
+.auth__link:hover {
+  opacity: 0.7;
+}
 
+@media screen and (min-width: 401px) and (max-width: 768px) {
   .auth {
     padding: 232px 0;
   }
@@ -131,21 +141,12 @@
     font-size: 14px;
     line-height: 17px;
   }
-
-  .auth__description {
-    font-size: 14px;
-    line-height: 17px;
-  }
-
-  .auth__link {
-    font-size: 14px;
-    line-height: 17px;
-  }
 }
 
 @media screen and (max-width: 400px) {
   .auth {
     align-items: center;
+    padding: 56px 0 30px;
   }
 
   .auth__logo {
@@ -154,5 +155,10 @@
 
   .auth__title {
     margin-bottom: 80px;
+  }
+
+  .auth__description, .auth__link {
+    font-size: 12px;
+    line-height: 15px;
   }
 }
