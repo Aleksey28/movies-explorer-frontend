@@ -5,7 +5,7 @@ function SearchForm() {
   return (
     <form className="search">
       <div className="search__container search__container_type_query">
-        <input className="search__text"/>
+        <input className="search__text" required/>
         <button type="submit" className="search__btn">Поиск</button>
       </div>
       <div className="search__container search__container_type_filter">
