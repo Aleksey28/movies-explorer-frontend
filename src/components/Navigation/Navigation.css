@@ -14,11 +14,11 @@
 }
 
 .navigation__list li {
-  margin-bottom: 28px;
+  margin-right: 16px;
 }
 
 .navigation__list li:last-of-type {
-  margin-bottom: 0;
+  margin-right: 0;
 }
 
 .navigation__item_visible-in-bar {
@@ -100,6 +100,14 @@
 
   .navigation__list_opened {
     width: 520px;
+  }
+
+  .navigation__list li {
+    margin: 0 0 28px;
+  }
+
+  .navigation__list li:last-of-type {
+    margin-bottom: 0;
   }
 
   .navigation__item_visible-in-bar {
