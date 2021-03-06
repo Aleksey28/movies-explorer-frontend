@@ -1,0 +1,142 @@
+.table {
+  display: flex;
+  margin: 0 0 110px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.table li {
+  margin-right: 52px;
+}
+
+.table li:last-of-type {
+  margin-right: 0;
+}
+
+.table__heading {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  margin: 0 0 26px;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+.table__text {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 20px;
+  margin: 0;
+  color: #fff;
+}
+
+.time-line {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 4fr;
+  row-gap: 14px;
+}
+
+.time-line__number {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  margin: 0;
+}
+
+.time-line__number:nth-of-type(2n+1) {
+  color: #000;
+  background: #3ddc84;
+}
+
+.time-line__number:nth-of-type(2n+2) {
+  color: #fff;
+  background: #303030;
+}
+
+.time-line__description {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 17px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #8b8b8b;
+}
+
+@media screen and (max-width: 768px) {
+  .table {
+    margin: 0 0 93px;
+  }
+
+  .table li {
+    margin-right: 37px;
+  }
+
+  .table li:last-of-type {
+    margin-right: 0;
+  }
+
+  .table__heading {
+    margin: 0 0 22px;
+  }
+
+  .table__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .table {
+    flex-direction: column;
+    margin: 0 0 60px;
+  }
+
+  .table li {
+    margin: 0 0 56px;
+  }
+
+  .table li:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .table__heading {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 16px;
+  }
+
+  .table__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .time-line__number {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .time-line__description {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .time-line {
+    grid-template-columns: minmax(100px, 2fr) minmax(184px, 3fr);
+    row-gap: 8px;
+  }
+}
