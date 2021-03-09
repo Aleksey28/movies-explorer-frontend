@@ -135,6 +135,10 @@ export const propsAuthLogIn = {
     { name: "email", label: "E-mail", type: "text" },
     { name: "password", label: "Пароль", type: "password" },
   ],
+  defaultValues: [
+    { email: "" },
+    { password: "" },
+  ],
   title: "Рады видеть!",
   name: "login",
   submitText: "Войти",
@@ -142,6 +146,36 @@ export const propsAuthLogIn = {
     description: "Ещё не зарегистрированы?",
     linkTo: "/signup",
     linkText: "Регистрация",
+  },
+  validators: {
+    email: {
+      required: (value) => {
+        return {
+          valid: !!value,
+          message: "Вы пропустили это поле.",
+        };
+      },
+      minLength: (value) => {
+        return {
+          valid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+          message: `Некорректный e-mail`,
+        };
+      },
+    },
+    password: {
+      required: (value) => {
+        return {
+          valid: !!value,
+          message: "Вы пропустили это поле.",
+        };
+      },
+      minLength: (value) => {
+        return {
+          valid: value.length > 7,
+          message: `Минимальное количество символов: 8. Длина текста сейчас: ${value.length} символ.`,
+        };
+      },
+    },
   },
 };
 
@@ -151,6 +185,11 @@ export const propsAuthRegister = {
     { name: "email", label: "E-mail", type: "text" },
     { name: "password", label: "Пароль", type: "password" },
   ],
+  defaultValues: [
+    { name: "" },
+    { email: "" },
+    { password: "" },
+  ],
   title: "Добро пожаловать!",
   name: "register",
   submitText: "Зарегистрироваться",
@@ -158,6 +197,50 @@ export const propsAuthRegister = {
     description: "Уже зарегистрированы?",
     linkTo: "/signin",
     linkText: "Войти",
+  },
+  validators: {
+    name: {
+      required: (value) => {
+        return {
+          valid: !!value,
+          message: "Вы пропустили это поле.",
+        };
+      },
+      minLength: (value) => {
+        return {
+          valid: value.length > 7,
+          message: `Минимальное количество символов: 8. Длина текста сейчас: ${value.length} символ.`,
+        };
+      },
+    },
+    email: {
+      required: (value) => {
+        return {
+          valid: !!value,
+          message: "Вы пропустили это поле.",
+        };
+      },
+      minLength: (value) => {
+        return {
+          valid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+          message: `Некорректный e-mail`,
+        };
+      },
+    },
+    password: {
+      required: (value) => {
+        return {
+          valid: !!value,
+          message: "Вы пропустили это поле.",
+        };
+      },
+      minLength: (value) => {
+        return {
+          valid: value.length > 7,
+          message: `Минимальное количество символов: 8. Длина текста сейчас: ${value.length} символ.`,
+        };
+      },
+    },
   },
 };
 
