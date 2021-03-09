@@ -125,9 +125,43 @@ export const cards = [
 
 export const propsProfile = {
   inputsList: [
-    { name: "name", label: "Имя", type: "text", value: "Виталий" },
-    { name: "email", label: "Почта", type: "text", value: "pochta@yandex.ru" },
+    { name: "name", label: "Имя", type: "text" },
+    { name: "email", label: "Почта", type: "text" },
   ],
+  defaultValues: [
+    { name: "" },
+    { email: "" },
+  ],
+  validators: {
+    name: {
+      required: (value) => {
+        return {
+          valid: !!value,
+          message: "Вы пропустили это поле.",
+        };
+      },
+      minLength: (value) => {
+        return {
+          valid: value.length > 7,
+          message: `Минимальное количество символов: 8. Длина текста сейчас: ${value.length} символ.`,
+        };
+      },
+    },
+    email: {
+      required: (value) => {
+        return {
+          valid: !!value,
+          message: "Вы пропустили это поле.",
+        };
+      },
+      minLength: (value) => {
+        return {
+          valid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+          message: `Некорректный e-mail`,
+        };
+      },
+    },
+  },
 };
 
 export const propsAuthLogIn = {

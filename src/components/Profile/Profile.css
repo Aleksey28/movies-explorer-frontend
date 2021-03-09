@@ -65,6 +65,9 @@
   background: none;
 }
 
+.profile__input_error {
+}
+
 .profile__error {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 10px;
@@ -77,6 +80,11 @@
   text-align: right;
   color: #ee3465;
 }
+
+.profile__error_visible {
+  visibility: visible;
+}
+
 
 .profile__btn {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -106,6 +114,12 @@
 .profile__btn_type_exit {
   font-weight: 500;
   color: #ee3465;
+}
+
+.profile__btn_disabled {
+  user-select: none;
+  pointer-events: none;
+  opacity: .2;
 }
 
 @media screen and (max-width: 768px) {
