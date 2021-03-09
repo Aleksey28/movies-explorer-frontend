@@ -160,3 +160,17 @@ export const propsAuthRegister = {
     linkText: "Войти",
   },
 };
+
+export const moviesApiSettings = {
+  baseUrl: "https://api.nomoreparties.co",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
+export const mainApiSettings = {
+  baseUrl: "https://movies-explorer.api.students.nomoredomains.monster",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
