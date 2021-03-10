@@ -10,7 +10,7 @@ function MoviesCard({ data }) {
     <div className="card">
       <div className="card__header">
         <p className="card__title">{nameRU}</p>
-        <p className="card__time">{`${Math.floor(duration / 60)} минут`}</p>
+        <p className="card__time">{duration} минут</p>
       </div>
       <img src={`${moviesApiSettings.baseUrl}${image.url}`} alt="Изображение фильма." className="card__image"/>
       <button

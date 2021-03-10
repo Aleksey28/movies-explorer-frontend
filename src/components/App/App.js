@@ -89,10 +89,13 @@ function App() {
       });
   };
 
-  const handleSearchMovies = (searchText) => {
+  const handleSearchMovies = ({ text,  short = false}) => {
     setMoviesCards(JSON.parse(localStorage.getItem("searchedMovies")).filter(item => {
+      if(short && item.duration > 40) {
+        return false
+      }
       for (let key in item) {
-        if (typeof item[key] === "string" && item[key].includes(searchText.text)) {
+        if (typeof item[key] === "string" && item[key].toLowerCase().includes(text.toLowerCase())) {
           return true;
         }
       }

@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
 import Form, { Field, Submit } from "../../Form/Form";
 import { propsSearch } from "../../../utils/constants";
 
 function SearchForm({ uploadMovies }) {
 
+  const [filter, setFilter] = useState({
+    short: false,
+  });
+
   const handleSearch = (data) => {
-    uploadMovies(data);
+    uploadMovies({ ...data, ...filter });
   };
 
   return (
@@ -46,7 +50,9 @@ function SearchForm({ uploadMovies }) {
       </div>
       <div className="search__container search__container_type_filter">
         <label>
-          <input type="checkbox" className="search__filter"/>
+          <input type="checkbox"
+                 className="search__filter"
+                 onChange={() => {setFilter((prev) => ({ ...prev, short: !prev.short }));}}/>
           <span className="search__visible-filter"/>
         </label>
         <label className="search__label">Короткометражки</label>
