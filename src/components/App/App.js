@@ -12,11 +12,13 @@ import Movies from "../Movies/Movies";
 import { cards } from "../../utils/constants";
 import MoviesApi from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const { pathname } = useLocation();
+  const [currentUser, setCurrentUser] = useState({});
   const [moviesCards, setMoviesCards] = useState([]);
+  const { pathname } = useLocation();
 
   const handleSignIn = () => {
     setLoggedIn(true);
@@ -34,44 +36,46 @@ function App() {
   };
 
   return (
-    <div className="page">
-      <Switch>
-        <Route path="/error">
-          <Error/>
-        </Route>
-        <Route path="/signin">
-          <Login onSignIn={handleSignIn}/>
-        </Route>
-        <Route path="/signup">
-          <Register/>
-        </Route>
-        <Route path="/">
-          <div className={`page__container ${pathname === "/" && "page__container_color_blue"}`}>
-            <Header loggedIn={loggedIn}/>
-          </div>
-          <Switch>
-            <Route exact path="/">
-              <Main/>
-            </Route>
-            <ProtectedRoute path="/movies" loggedIn={loggedIn}>
-              <Movies moviesCards={moviesCards} uploadMovies={uploadMovies}/>
-            </ProtectedRoute>
-            <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
-              <Movies moviesCards={cards.filter(item => item.saved)}/>
-            </ProtectedRoute>
-            <ProtectedRoute path="/profile" loggedIn={loggedIn}>
-              <Profile onSignOut={handleSignOut}/>
-            </ProtectedRoute>
-          </Switch>
-          <Switch>
-            <ProtectedRoute path="/profile" loggedIn={loggedIn}/>
-            <Route path="/">
-              <Footer/>
-            </Route>
-          </Switch>
-        </Route>
-      </Switch>
-    </div>
+    <CurrentUserContext.Provider value={{ ...currentUser }}>
+      <div className="page">
+        <Switch>
+          <Route path="/error">
+            <Error/>
+          </Route>
+          <Route path="/signin">
+            <Login onSignIn={handleSignIn}/>
+          </Route>
+          <Route path="/signup">
+            <Register/>
+          </Route>
+          <Route path="/">
+            <div className={`page__container ${pathname === "/" && "page__container_color_blue"}`}>
+              <Header loggedIn={loggedIn}/>
+            </div>
+            <Switch>
+              <Route exact path="/">
+                <Main/>
+              </Route>
+              <ProtectedRoute path="/movies" loggedIn={loggedIn}>
+                <Movies moviesCards={moviesCards} uploadMovies={uploadMovies}/>
+              </ProtectedRoute>
+              <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
+                <Movies moviesCards={cards.filter(item => item.saved)}/>
+              </ProtectedRoute>
+              <ProtectedRoute path="/profile" loggedIn={loggedIn}>
+                <Profile onSignOut={handleSignOut}/>
+              </ProtectedRoute>
+            </Switch>
+            <Switch>
+              <ProtectedRoute path="/profile" loggedIn={loggedIn}/>
+              <Route path="/">
+                <Footer/>
+              </Route>
+            </Switch>
+          </Route>
+        </Switch>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
