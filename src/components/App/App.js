@@ -52,13 +52,22 @@ function App() {
       });
   };
 
-  const handleSignIn = () => {
-    setLoggedIn(true);
-  };
-
   const handleExit = () => {
     MainApi.signOut();
     setLoggedIn(false);
+  };
+
+  const handleAuthorization = (data) => {
+    setIsLoading(true);
+    MainApi.signIn(data)
+      .then((res) => {
+        setLoggedIn(true);
+        setCurrentUser(res);
+      })
+      .catch(console.log)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const uploadMovies = (searchText) => {
@@ -76,7 +85,7 @@ function App() {
             <Error/>
           </Route>
           <Route path="/signin">
-            <Login onSignIn={handleSignIn}/>
+            <Login onAuthorization={handleAuthorization}/>
           </Route>
           <Route path="/signup">
             <Register onRegistration={handleRegistration}/>
