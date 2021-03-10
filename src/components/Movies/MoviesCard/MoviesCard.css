@@ -11,6 +11,7 @@
   display: flex;
   justify-content: space-between;
   padding: 18px;
+  box-sizing: border-box;
 }
 
 .card__title {
@@ -20,8 +21,9 @@
   font-style: normal;
   line-height: 18px;
   overflow: hidden;
-  width: calc(100% - 70px);
-  margin: 0;
+  width: 1px;
+  flex-grow: 1;
+  margin: 0 10px 0 0 ;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #fff;
@@ -43,6 +45,7 @@
   object-fit: cover;
   cursor: pointer;
   transition: opacity ease-in .2s;
+  height: 200px;
 }
 
 .card__image:hover {
@@ -85,6 +88,19 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+@media screen and (max-width: 768px) {
+  .card__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .card__image {
+    height: 168px;
+  }
+}
+
 
 @media screen and (max-width: 400px) {
   .card__header {
