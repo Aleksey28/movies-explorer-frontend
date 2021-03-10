@@ -24,6 +24,13 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
+    MoviesApi.getMoviesList()
+      .then((data) => {
+        localStorage.setItem("searchedMovies", JSON.stringify(data));
+      });
+  }, []);
+
+  useEffect(() => {
     MainApi
       .getUserData()
       .then((data) => {
@@ -37,7 +44,7 @@ function App() {
     if (loggedIn) {
       history.push("/movies");
     }
-  }, [loggedIn]);
+  }, [loggedIn, history]);
 
   const handleRegistration = (data) => {
     setIsLoading(true);
@@ -80,13 +87,17 @@ function App() {
       .finally(() => {
         setIsLoading(false);
       });
-  }
+  };
 
-  const uploadMovies = (searchText) => {
-    MoviesApi.getMoviesList()
-      .then((data) => {
-        setMoviesCards(data);
-      });
+  const handleSearchMovies = (searchText) => {
+    setMoviesCards(JSON.parse(localStorage.getItem("searchedMovies")).filter(item => {
+      for (let key in item) {
+        if (typeof item[key] === "string" && item[key].includes(searchText.text)) {
+          return true;
+        }
+      }
+      return false;
+    }));
   };
 
   return (
@@ -111,7 +122,7 @@ function App() {
                 <Main/>
               </Route>
               <ProtectedRoute path="/movies" loggedIn={loggedIn}>
-                <Movies moviesCards={moviesCards} uploadMovies={uploadMovies}/>
+                <Movies moviesCards={moviesCards} uploadMovies={handleSearchMovies}/>
               </ProtectedRoute>
               <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
                 <Movies moviesCards={cards.filter(item => item.saved)}/>

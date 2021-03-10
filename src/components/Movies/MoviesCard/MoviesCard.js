@@ -1,9 +1,10 @@
 import React from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router";
+import { moviesApiSettings } from "../../../utils/constants";
 
 function MoviesCard({ data }) {
-  const { nameRU, duration, image, saved } = data;
+  const { nameRU, duration, image, saved = false } = data;
   const { pathname } = useLocation();
   return (
     <div className="card">
@@ -11,7 +12,7 @@ function MoviesCard({ data }) {
         <p className="card__title">{nameRU}</p>
         <p className="card__time">{`${Math.floor(duration / 60)} минут`}</p>
       </div>
-      <img src={image.url} alt="Изображение фильма." className="card__image"/>
+      <img src={`${moviesApiSettings.baseUrl}${image.url}`} alt="Изображение фильма." className="card__image"/>
       <button
         className={
           `card__btn 
