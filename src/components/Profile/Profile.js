@@ -3,7 +3,7 @@ import React from "react";
 import "./Profile.css";
 import Form, { Field, Submit } from "../Form/Form";
 
-function Profile({ onSignOut }) {
+function Profile({ onExit }) {
   const handleSubmit = (data) => {
     console.log(data);
   };
@@ -56,7 +56,7 @@ function Profile({ onSignOut }) {
           )
         }
       </Submit>
-      <button className="profile__btn profile__btn_type_exit" onClick={onSignOut}>Выйти из аккаунта</button>
+      <button className="profile__btn profile__btn_type_exit" onClick={onExit}>Выйти из аккаунта</button>
     </Form>
   );
 }

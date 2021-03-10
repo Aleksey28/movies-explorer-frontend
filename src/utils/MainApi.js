@@ -29,7 +29,7 @@ class MainApi extends Api {
   async signOut() {
     const params = {
       relativePath: "/signout",
-      method: "POST",
+      method: "GET",
     };
     const response = await this._getProxy(params);
     return await this._handleResponse(response);

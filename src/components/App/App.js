@@ -45,7 +45,6 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
-        console.log(res);
       })
       .catch(console.log)
       .finally(() => {
@@ -57,7 +56,8 @@ function App() {
     setLoggedIn(true);
   };
 
-  const handleSignOut = () => {
+  const handleExit = () => {
+    MainApi.signOut();
     setLoggedIn(false);
   };
 
@@ -96,7 +96,7 @@ function App() {
                 <Movies moviesCards={cards.filter(item => item.saved)}/>
               </ProtectedRoute>
               <ProtectedRoute path="/profile" loggedIn={loggedIn}>
-                <Profile onSignOut={handleSignOut}/>
+                <Profile onExit={handleExit}/>
               </ProtectedRoute>
             </Switch>
             <Switch>
