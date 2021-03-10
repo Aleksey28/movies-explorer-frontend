@@ -125,7 +125,7 @@ export const cards = [
 
 export const propsProfile = {
   inputsList: [
-    { name: "name", label: "Имя", type: "text" },
+    { name: "name", label: "Имя", type: "text", maxLength: 30 },
     { name: "email", label: "Почта", type: "text" },
   ],
   defaultValues: [
@@ -142,8 +142,14 @@ export const propsProfile = {
       },
       minLength: (value) => {
         return {
-          valid: value.length > 7,
-          message: `Минимальное количество символов: 8. Длина текста сейчас: ${value.length} символ.`,
+          valid: value.length > 1,
+          message: `Минимальное количество символов: 2. Длина текста сейчас: ${value.length} символ.`,
+        };
+      },
+      mask: (value) => {
+        return {
+          valid: !/[^a-z-\s]/i.test(value),
+          message: `Поле может содержать только латиницу, пробел или дефис.`,
         };
       },
     },
@@ -215,7 +221,7 @@ export const propsAuthLogIn = {
 
 export const propsAuthRegister = {
   inputsList: [
-    { name: "name", label: "Имя", type: "text" },
+    { name: "name", label: "Имя", type: "text", maxLength: 30 },
     { name: "email", label: "E-mail", type: "text" },
     { name: "password", label: "Пароль", type: "password" },
   ],
@@ -242,8 +248,14 @@ export const propsAuthRegister = {
       },
       minLength: (value) => {
         return {
-          valid: value.length > 7,
-          message: `Минимальное количество символов: 8. Длина текста сейчас: ${value.length} символ.`,
+          valid: value.length > 1,
+          message: `Минимальное количество символов: 2. Длина текста сейчас: ${value.length} символ.`,
+        };
+      },
+      mask: (value) => {
+        return {
+          valid: !/[^a-z-\s]/i.test(value),
+          message: `Поле может содержать только латиницу, пробел или дефис.`,
         };
       },
     },
