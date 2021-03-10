@@ -28,12 +28,12 @@ export default function Form({
   }, [defaultValues]);
 
   useEffect(() => {
-    if (!isOpen) {
-      //Обнуляем стейт отображения ошибок
-      setShowErrors({});
-      //Устанавливаем дефолтные значения
-      setFormValues(defaultValues);
-    }
+    // if (!isOpen) {
+    //Обнуляем стейт отображения ошибок
+    setShowErrors({});
+    //Устанавливаем дефолтные значения
+    setFormValues(defaultValues);
+    // }
   }, [isOpen, defaultValues]);
 
   //Обработчик изменения любого инпута
@@ -89,7 +89,7 @@ export default function Form({
         }
       }
     }
-    setIsInvalid(false);
+    setIsInvalid(Object.keys(formValues).length !== Object.keys(formErrors).length);
   }, [formErrors]);
 
   //Заполняем контекст формы

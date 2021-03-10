@@ -128,10 +128,10 @@ export const propsProfile = {
     { name: "name", label: "Имя", type: "text", maxLength: 30 },
     { name: "email", label: "Почта", type: "text" },
   ],
-  defaultValues: [
-    { name: "" },
-    { email: "" },
-  ],
+  defaultValues: {
+    name: "",
+    email: "",
+  },
   validators: {
     name: {
       required: (value) => {
@@ -170,15 +170,31 @@ export const propsProfile = {
   },
 };
 
+export const propsSearch = {
+  defaultValues: {
+    text: "",
+  },
+  validators: {
+    text: {
+      required: (value) => {
+        return {
+          valid: !!value,
+          message: "Нужно ввести ключевое слово.",
+        };
+      },
+    },
+  },
+};
+
 export const propsAuthLogIn = {
   inputsList: [
     { name: "email", label: "E-mail", type: "text" },
     { name: "password", label: "Пароль", type: "password" },
   ],
-  defaultValues: [
-    { email: "" },
-    { password: "" },
-  ],
+  defaultValues: {
+    password: "",
+    email: "",
+  },
   title: "Рады видеть!",
   name: "login",
   submitText: "Войти",
@@ -225,11 +241,11 @@ export const propsAuthRegister = {
     { name: "email", label: "E-mail", type: "text" },
     { name: "password", label: "Пароль", type: "password" },
   ],
-  defaultValues: [
-    { name: "" },
-    { email: "" },
-    { password: "" },
-  ],
+  defaultValues: {
+    name: "",
+    email: "",
+    password: "",
+  },
   title: "Добро пожаловать!",
   name: "register",
   submitText: "Зарегистрироваться",
