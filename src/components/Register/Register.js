@@ -1,13 +1,11 @@
 import Auth from "../Auth/Auth";
 import React from "react";
-import { propsAuthRegister } from '../../utils/constants';
-import { useHistory } from "react-router";
+import { propsAuthRegister } from "../../utils/constants";
 
-function Register() {
-  const history = useHistory();
-  const handleRegistration = () => {
-    history.push("/signin")
-  }
+function Register({ onRegistration }) {
+  const handleRegistration = (data) => {
+    onRegistration(data);
+  };
   return (
     <Auth {...propsAuthRegister} onSubmit={handleRegistration}/>
   );

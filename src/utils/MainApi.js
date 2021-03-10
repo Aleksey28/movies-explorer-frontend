@@ -6,11 +6,11 @@ class MainApi extends Api {
     super({ baseUrl, headers });
   }
 
-  async signUp({ password, email }) {
+  async signUp({ name, password, email }) {
     const params = {
       relativePath: "/signup",
       method: "POST",
-      body: JSON.stringify({ password, email }),
+      body: JSON.stringify({ name, password, email }),
     };
     const response = await this._getProxy(params);
     return await this._handleResponse(response);

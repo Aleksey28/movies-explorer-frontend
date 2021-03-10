@@ -286,7 +286,8 @@ export const moviesApiSettings = {
 };
 
 export const mainApiSettings = {
-  baseUrl: "https://movies-explorer.api.students.nomoredomains.monster",
+  // baseUrl: "https://movies-explorer.api.students.nomoredomains.monster",
+  baseUrl: "http://localhost:3001",
   headers: {
     "Content-Type": "application/json",
   },

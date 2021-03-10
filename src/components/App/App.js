@@ -1,24 +1,57 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
-import { Route, Switch, useLocation } from "react-router";
+import { Route, Switch, useHistory, useLocation } from "react-router";
 import Footer from "../Footer/Footer";
 import Error from "../Error/Error";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import Movies from "../Movies/Movies";
-import { cards } from "../../utils/constants";
-import MoviesApi from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { cards } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import MoviesApi from "../../utils/MoviesApi";
+import MainApi from "../../utils/MainApi";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [moviesCards, setMoviesCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { pathname } = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    MainApi
+      .getUserData()
+      .then((data) => {
+        setLoggedIn(true);
+        setCurrentUser(data);
+      })
+      .catch(console.log);
+  }, []);
+
+  useEffect(() => {
+    if (loggedIn) {
+      history.push("/movies");
+    }
+  }, [loggedIn]);
+
+  const handleRegistration = (data) => {
+    setIsLoading(true);
+    MainApi.signUp(data)
+      .then((res) => {
+        setLoggedIn(true);
+        setCurrentUser(res);
+        console.log(res);
+      })
+      .catch(console.log)
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   const handleSignIn = () => {
     setLoggedIn(true);
@@ -46,7 +79,7 @@ function App() {
             <Login onSignIn={handleSignIn}/>
           </Route>
           <Route path="/signup">
-            <Register/>
+            <Register onRegistration={handleRegistration}/>
           </Route>
           <Route path="/">
             <div className={`page__container ${pathname === "/" && "page__container_color_blue"}`}>

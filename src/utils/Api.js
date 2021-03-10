@@ -7,7 +7,7 @@ export default class Api {
   _getProxy({ relativePath, method, body = "", headers = {} }) {
     const options = {
       method,
-      // credential: "include",
+      credentials: "include",
       headers: { ...this._headers, ...headers },
     };
 
