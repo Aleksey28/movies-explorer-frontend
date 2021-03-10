@@ -10,18 +10,28 @@ import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import Movies from "../Movies/Movies";
 import { cards } from "../../utils/constants";
+import MoviesApi from "../../utils/MoviesApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
+  const [moviesCards, setMoviesCards] = useState([]);
 
   const handleSignIn = () => {
     setLoggedIn(true);
-  }
+  };
 
   const handleSignOut = () => {
     setLoggedIn(false);
-  }
+  };
+
+  const uploadMovies = (searchText) => {
+    MoviesApi.getMoviesList()
+      .then((data) => {
+        setMoviesCards(data);
+      });
+  };
 
   return (
     <div className="page">
@@ -36,23 +46,25 @@ function App() {
           <Register/>
         </Route>
         <Route path="/">
-          <div className={`page__container ${pathname === '/' && "page__container_color_blue"}`}>
+          <div className={`page__container ${pathname === "/" && "page__container_color_blue"}`}>
             <Header loggedIn={loggedIn}/>
           </div>
-          <Route exact path="/">
-            <Main/>
-          </Route>
-          <Route path="/movies">
-            <Movies cards={cards}/>
-          </Route>
-          <Route path="/saved-movies">
-            <Movies cards={cards.filter(item => item.saved)}/>
-          </Route>
-          <Route path="/profile">
-            <Profile onSignOut={handleSignOut}/>
-          </Route>
           <Switch>
-            <Route path="/profile"/>
+            <Route exact path="/">
+              <Main/>
+            </Route>
+            <ProtectedRoute path="/movies" loggedIn={loggedIn}>
+              <Movies moviesCards={moviesCards} uploadMovies={uploadMovies}/>
+            </ProtectedRoute>
+            <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
+              <Movies moviesCards={cards.filter(item => item.saved)}/>
+            </ProtectedRoute>
+            <ProtectedRoute path="/profile" loggedIn={loggedIn}>
+              <Profile onSignOut={handleSignOut}/>
+            </ProtectedRoute>
+          </Switch>
+          <Switch>
+            <ProtectedRoute path="/profile" loggedIn={loggedIn}/>
             <Route path="/">
               <Footer/>
             </Route>
