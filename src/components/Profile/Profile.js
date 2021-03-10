@@ -1,11 +1,15 @@
 import { propsProfile } from "../../utils/constants";
-import React from "react";
+import React, { useContext } from "react";
 import "./Profile.css";
 import Form, { Field, Submit } from "../Form/Form";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile({ onExit }) {
+function Profile({ onUpdateUser, onExit }) {
+
+  const currentUser = useContext(CurrentUserContext);
+
   const handleSubmit = (data) => {
-    console.log(data);
+    onUpdateUser(data);
   };
 
   const fieldList = propsProfile.inputsList.map(item => (
@@ -37,10 +41,10 @@ function Profile({ onExit }) {
       name="profile"
       onSubmit={handleSubmit}
       validators={propsProfile.validators}
-      defaultValues={propsProfile.defaultValues}
+      defaultValues={currentUser}
       isOpen={true}
     >
-      <h2 className="profile__title">Привет, Виталий!</h2>
+      <h2 className="profile__title">Привет, {currentUser.name}!</h2>
       <fieldset className="profile__fieldset">
         {fieldList}
       </fieldset>

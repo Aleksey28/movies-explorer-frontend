@@ -70,6 +70,18 @@ function App() {
       });
   };
 
+  const handleUpdateUser = (data) => {
+    setIsLoading(true);
+    MainApi.setUserData(data)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch(console.log)
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   const uploadMovies = (searchText) => {
     MoviesApi.getMoviesList()
       .then((data) => {
@@ -105,7 +117,7 @@ function App() {
                 <Movies moviesCards={cards.filter(item => item.saved)}/>
               </ProtectedRoute>
               <ProtectedRoute path="/profile" loggedIn={loggedIn}>
-                <Profile onExit={handleExit}/>
+                <Profile onUpdateUser={handleUpdateUser} onExit={handleExit}/>
               </ProtectedRoute>
             </Switch>
             <Switch>

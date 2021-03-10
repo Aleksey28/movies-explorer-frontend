@@ -47,7 +47,7 @@ class MainApi extends Api {
   async setUserData({ name, about }) {
     const params = {
       relativePath: "/users/me",
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify({ name, about }),
     };
     const response = await this._getProxy(params);

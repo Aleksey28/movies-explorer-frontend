@@ -50,6 +50,7 @@
   font-style: normal;
   line-height: 13px;
   color: #fff;
+  margin-right: 20px;
 }
 
 .profile__input {
@@ -58,6 +59,7 @@
   font-weight: normal;
   font-style: normal;
   line-height: 13px;
+  flex-grow: 1;
   padding: 0;
   text-align: right;
   color: #fff;
@@ -85,7 +87,6 @@
 .profile__error_visible {
   visibility: visible;
 }
-
 
 .profile__btn {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
