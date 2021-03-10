@@ -319,4 +319,5 @@ export const mainApiSettings = {
   headers: {
     "Content-Type": "application/json",
   },
+  credentials: "include"
 };

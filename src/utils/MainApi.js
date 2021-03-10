@@ -2,8 +2,8 @@ import { mainApiSettings } from "./constants";
 import Api from "./Api";
 
 class MainApi extends Api {
-  constructor({ baseUrl, headers }) {
-    super({ baseUrl, headers });
+  constructor({ baseUrl, headers, credentials }) {
+    super({ baseUrl, headers, credentials });
   }
 
   async signUp({ name, password, email }) {
