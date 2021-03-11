@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 import { moviesApiSettings } from "../../../utils/constants";
 
 function MoviesCard({ data }) {
-  const { nameRU, duration, image, saved = false } = data;
+  const { nameRU, duration, image, trailerLink, saved = false } = data;
   const { pathname } = useLocation();
   return (
     <div className="card">
@@ -12,9 +12,11 @@ function MoviesCard({ data }) {
         <p className="card__title">{nameRU}</p>
         <p className="card__time">{duration} минут</p>
       </div>
-      <img src={image ? `${moviesApiSettings.baseUrl}${image.url}` : "#"}
-           alt="Изображение фильма."
-           className="card__image"/>
+      <a href={trailerLink} target="_blank">
+        <img src={image ? `${moviesApiSettings.baseUrl}${image.url}` : "#"}
+             alt="Изображение фильма."
+             className="card__image"/>
+      </a>
       <button
         className={
           `card__btn 
