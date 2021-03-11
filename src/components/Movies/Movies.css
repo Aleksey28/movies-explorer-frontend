@@ -50,4 +50,7 @@
   .movies {
     padding: 70px 10px 80px;
   }
+  .movies__more {
+    width: 240px;
+  }
 }
