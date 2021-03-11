@@ -10,7 +10,6 @@ import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import Movies from "../Movies/Movies";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { cards } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import MoviesApi from "../../utils/MoviesApi";
 import MainApi from "../../utils/MainApi";
@@ -19,6 +18,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [moviesCards, setMoviesCards] = useState([]);
+  const [savedMoviesCards, setSavedMoviesCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [countCards, setCountCards] = useState(window.screen.width > 768 ? 12 : window.screen.width > 400 ? 8 : 5);
   const [currentViewportWidth, setCurrentViewportWidth] = useState(window.screen.width);
@@ -63,6 +63,11 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       history.push("/movies");
+      MainApi.getMoviesList()
+        .then((data) => {
+          setSavedMoviesCards(data);
+        })
+        .catch(console.log);
     }
   }, [loggedIn, history]);
 
@@ -109,7 +114,7 @@ function App() {
       });
   };
 
-  const handleSearchMovies = ({ text, short = false }) => {
+  const handleSearchMovies = ({ text = "", short = false }) => {
     const filteredMovies = JSON.parse(localStorage.getItem("searchedMovies")).filter(item => {
       if (short && item.duration > 40) {
         return false;
@@ -161,10 +166,10 @@ function App() {
                 <Movies moviesCards={moviesCards}
                         countCards={countCards}
                         handleIncCountOfCards={handleIncCountOfCards}
-                        uploadMovies={handleSearchMovies}/>
+                        searchMovies={handleSearchMovies}/>
               </ProtectedRoute>
               <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
-                <Movies moviesCards={cards.filter(item => item.saved)}
+                <Movies moviesCards={savedMoviesCards}
                         countCards={countCards}
                         handleIncCountOfCards={handleIncCountOfCards}/>
               </ProtectedRoute>

@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchForm.css";
 import Form, { Field, Submit } from "../../Form/Form";
 import { propsSearch } from "../../../utils/constants";
 
-function SearchForm({ uploadMovies }) {
+function SearchForm({ searchMovies }) {
 
-  const [filter, setFilter] = useState({
+  const [filters, setFilters] = useState({
     short: false,
   });
 
-  const handleSearch = (data) => {
-    uploadMovies({ ...data, ...filter });
+  const handleSubmit = (data) => {
+    setFilters(prev => ({ ...prev, ...data }));
   };
+
+  useEffect(() => {
+    searchMovies(filters);
+  }, [filters, searchMovies]);
 
   return (
     <Form
       className="search"
       name="search"
-      onSubmit={handleSearch}
+      onSubmit={handleSubmit}
       validators={propsSearch.validators}
       defaultValues={propsSearch.defaultValues}
       isOpen={true}>
@@ -52,7 +56,7 @@ function SearchForm({ uploadMovies }) {
         <label>
           <input type="checkbox"
                  className="search__filter"
-                 onChange={() => {setFilter((prev) => ({ ...prev, short: !prev.short }));}}/>
+                 onChange={() => {setFilters((prev) => ({ ...prev, short: !prev.short }));}}/>
           <span className="search__visible-filter"/>
         </label>
         <label className="search__label">Короткометражки</label>
