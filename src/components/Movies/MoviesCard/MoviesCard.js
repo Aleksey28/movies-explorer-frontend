@@ -12,7 +12,9 @@ function MoviesCard({ data }) {
         <p className="card__title">{nameRU}</p>
         <p className="card__time">{duration} минут</p>
       </div>
-      <img src={`${moviesApiSettings.baseUrl}${image.url}`} alt="Изображение фильма." className="card__image"/>
+      <img src={image ? `${moviesApiSettings.baseUrl}${image.url}` : "#"}
+           alt="Изображение фильма."
+           className="card__image"/>
       <button
         className={
           `card__btn 

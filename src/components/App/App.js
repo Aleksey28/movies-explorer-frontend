@@ -21,6 +21,7 @@ function App() {
   const [moviesCards, setMoviesCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [countCards, setCountCards] = useState(window.screen.width > 768 ? 12 : window.screen.width > 400 ? 8 : 5);
+  const [currentViewportWidth, setCurrentViewportWidth] = useState(window.screen.width);
   const { pathname } = useLocation();
   const history = useHistory();
 
@@ -37,22 +38,27 @@ function App() {
         setCurrentUser(data);
       })
       .catch(console.log);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.screen.width !== currentViewportWidth) {
+        setCountCards(window.screen.width > 768 ? 12 : window.screen.width > 400 ? 8 : 5);
+        setCurrentViewportWidth(window.screen.width);
+      }
+    };
 
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [currentViewportWidth]);
 
   useEffect(() => {
     if (loggedIn) {
       history.push("/movies");
     }
   }, [loggedIn, history]);
-
-  const handleResize = () => {
-    setCountCards(window.screen.width > 768 ? 12 : window.screen.width > 400 ? 8 : 5);
-  };
 
   const handleRegistration = (data) => {
     setIsLoading(true);
@@ -111,6 +117,13 @@ function App() {
     }));
   };
 
+  const handleIncCountOfCards = () => {
+    setCountCards(prev => {
+        return prev + (window.screen.width > 768 ? 3 : 2);
+      },
+    );
+  };
+
   return (
     <CurrentUserContext.Provider value={{ ...currentUser }}>
       <div className="page">
@@ -133,10 +146,15 @@ function App() {
                 <Main/>
               </Route>
               <ProtectedRoute path="/movies" loggedIn={loggedIn}>
-                <Movies moviesCards={moviesCards} countCards={countCards} uploadMovies={handleSearchMovies}/>
+                <Movies moviesCards={moviesCards}
+                        countCards={countCards}
+                        handleIncCountOfCards={handleIncCountOfCards}
+                        uploadMovies={handleSearchMovies}/>
               </ProtectedRoute>
               <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
-                <Movies moviesCards={cards.filter(item => item.saved)} countCards={countCards}/>
+                <Movies moviesCards={cards.filter(item => item.saved)}
+                        countCards={countCards}
+                        handleIncCountOfCards={handleIncCountOfCards}/>
               </ProtectedRoute>
               <ProtectedRoute path="/profile" loggedIn={loggedIn}>
                 <Profile onUpdateUser={handleUpdateUser} onExit={handleExit}/>
