@@ -26,10 +26,12 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    MoviesApi.getMoviesList()
-      .then((data) => {
-        localStorage.setItem("searchedMovies", JSON.stringify(data));
-      });
+    if (!localStorage.getItem("searchedMovies")) {
+      MoviesApi.getMoviesList()
+        .then((data) => {
+          localStorage.setItem("searchedMovies", JSON.stringify(data));
+        });
+    }
 
     MainApi
       .getUserData()
@@ -38,6 +40,10 @@ function App() {
         setCurrentUser(data);
       })
       .catch(console.log);
+
+    if (localStorage.getItem("filters")) {
+      handleSearchMovies(JSON.parse(localStorage.getItem("filters")));
+    }
   }, []);
 
   useEffect(() => {
@@ -104,7 +110,7 @@ function App() {
   };
 
   const handleSearchMovies = ({ text, short = false }) => {
-    setMoviesCards(JSON.parse(localStorage.getItem("searchedMovies")).filter(item => {
+    const filteredMovies = JSON.parse(localStorage.getItem("searchedMovies")).filter(item => {
       if (short && item.duration > 40) {
         return false;
       }
@@ -114,7 +120,13 @@ function App() {
         }
       }
       return false;
+    });
+
+    localStorage.setItem("filters", JSON.stringify({
+      text,
+      short,
     }));
+    setMoviesCards(filteredMovies);
   };
 
   const handleIncCountOfCards = () => {
