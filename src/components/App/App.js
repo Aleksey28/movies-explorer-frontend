@@ -26,12 +26,10 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    if (!localStorage.getItem("searchedMovies")) {
-      MoviesApi.getMoviesList()
-        .then((data) => {
-          localStorage.setItem("searchedMovies", JSON.stringify(data));
-        });
-    }
+    MoviesApi.getMoviesList()
+      .then((data) => {
+        localStorage.setItem("searchedMovies", JSON.stringify(data));
+      });
 
     MainApi
       .getUserData()
@@ -141,6 +139,22 @@ function App() {
     );
   };
 
+  const handleSaveMovieCard = (data) => {
+    MainApi.addMovies(data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(console.log);
+  };
+
+  const handleDeleteMovieCard = (id) => {
+    MainApi.deleteMovies(id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(console.log);
+  };
+
   return (
     <CurrentUserContext.Provider value={{ ...currentUser }}>
       <div className="page">
@@ -165,14 +179,16 @@ function App() {
               <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                 <Movies moviesCards={moviesCards}
                         countCards={countCards}
-                        handleIncCountOfCards={handleIncCountOfCards}
+                        onSaveMovieCard={handleSaveMovieCard}
+                        onDeleteMovieCard={handleDeleteMovieCard}
+                        onIncCountOfCards={handleIncCountOfCards}
                         searchMovies={handleSearchMovies}/>
               </ProtectedRoute>
-              <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
-                <Movies moviesCards={savedMoviesCards}
-                        countCards={countCards}
-                        handleIncCountOfCards={handleIncCountOfCards}/>
-              </ProtectedRoute>
+              {/*<ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>*/}
+              {/*  <Movies moviesCards={savedMoviesCards}*/}
+              {/*          countCards={countCards}*/}
+              {/*          handleIncCountOfCards={handleIncCountOfCards}/>*/}
+              {/*</ProtectedRoute>*/}
               <ProtectedRoute path="/profile" loggedIn={loggedIn}>
                 <Profile onUpdateUser={handleUpdateUser} onExit={handleExit}/>
               </ProtectedRoute>

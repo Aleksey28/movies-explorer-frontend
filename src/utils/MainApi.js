@@ -63,11 +63,35 @@ class MainApi extends Api {
     return await this._handleResponse(response);
   }
 
-  async addMovies({ name, link }) {
+  async addMovies({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    movieId,
+    nameRU,
+    nameEN,
+    thumbnail,
+  }) {
     const params = {
       relativePath: "/movies",
       method: "POST",
-      body: JSON.stringify({ name, link }),
+      body: JSON.stringify({
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image,
+        trailer,
+        movieId,
+        nameRU,
+        nameEN,
+        thumbnail,
+      }),
     };
     const response = await this._getProxy(params);
     return await this._handleResponse(response);

@@ -3,9 +3,41 @@ import "./MoviesCard.css";
 import { useLocation } from "react-router";
 import { moviesApiSettings } from "../../../utils/constants";
 
-function MoviesCard({ data }) {
-  const { nameRU, duration, image, trailerLink, saved = false } = data;
+function MoviesCard({ data, onSaveMovieCard, onDeleteMovieCard }) {
+  const {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    id,
+    nameRU,
+    nameEN,
+  } = data;
   const { pathname } = useLocation();
+
+  const handleClick = () => {
+    if (true) {
+      onSaveMovieCard({
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image: image ? `${moviesApiSettings.baseUrl}${image.url}` : "",
+        trailer: trailerLink,
+        movieId: id,
+        nameRU,
+        nameEN,
+        thumbnail: image ? `${moviesApiSettings.baseUrl}${image.url}` : "#",
+      });
+    } else {
+      onDeleteMovieCard(id);
+    }
+  };
+
   return (
     <div className="card">
       <div className="card__header">
@@ -20,10 +52,11 @@ function MoviesCard({ data }) {
       <button
         className={
           `card__btn 
-          ${saved && pathname === "/movies" && "card__btn_color_pink"}
-          ${saved && (pathname === "/movies" ? "card__btn_type_check" : "card__btn_type_cross")}`
+          ${true && pathname === "/movies" && "card__btn_color_pink"}
+          ${true && (pathname === "/movies" ? "card__btn_type_check" : "card__btn_type_cross")}`
         }
-      >{!saved && pathname === "/movies"
+        onClick={handleClick}
+      >{!true && pathname === "/movies"
         ? "Сохранить"
         : ""}</button>
     </div>

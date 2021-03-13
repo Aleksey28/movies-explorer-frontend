@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
 import Form, { Field, Submit } from "../../Form/Form";
 import { propsSearch } from "../../../utils/constants";
@@ -10,12 +10,8 @@ function SearchForm({ searchMovies }) {
   });
 
   const handleSubmit = (data) => {
-    setFilters(prev => ({ ...prev, ...data }));
+    searchMovies({ ...data, ...filters });
   };
-
-  useEffect(() => {
-    searchMovies(filters);
-  }, [filters, searchMovies]);
 
   return (
     <Form
