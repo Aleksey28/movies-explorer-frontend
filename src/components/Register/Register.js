@@ -3,11 +3,8 @@ import React from "react";
 import { propsAuthRegister } from "../../utils/constants";
 
 function Register({ onRegistration }) {
-  const handleRegistration = (data) => {
-    onRegistration(data);
-  };
   return (
-    <Auth {...propsAuthRegister} onSubmit={handleRegistration}/>
+    <Auth {...propsAuthRegister} onSubmit={onRegistration}/>
   );
 }
 

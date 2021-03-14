@@ -8,10 +8,6 @@ function Profile({ onUpdateUser, onExit }) {
 
   const currentUser = useContext(CurrentUserContext);
 
-  const handleSubmit = (data) => {
-    onUpdateUser(data);
-  };
-
   const fieldList = propsProfile.inputsList.map(item => (
       <Field key={`profile-${item.name}`} name={item.name}>
         {
@@ -39,7 +35,7 @@ function Profile({ onUpdateUser, onExit }) {
     <Form
       className="profile"
       name="profile"
-      onSubmit={handleSubmit}
+      onSubmit={onUpdateUser}
       validators={propsProfile.validators}
       defaultValues={currentUser}
       isOpen={true}
