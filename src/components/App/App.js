@@ -30,6 +30,7 @@ function App() {
   const [error, setError] = useState({});
   const history = useHistory();
 
+  //Эффект при монтировании. Проверяем авторизацию пользователя и достаем из временного хранилища фильмы, если они есть.
   useEffect(() => {
     setIsLoading(true);
     MainApi
@@ -48,6 +49,7 @@ function App() {
     }
   }, []);
 
+  //Эффект при изменении размеров экрана. Высчитывает количество колонок.
   useEffect(() => {
     const handleResize = () => {
       if (window.screen.width !== currentViewportWidth) {
@@ -62,6 +64,7 @@ function App() {
     };
   }, [currentViewportWidth]);
 
+  //Эффект при авторизации. Получаем список фильмов пользователя.
   useEffect(() => {
     if (loggedIn) {
       setIsLoading(true);
@@ -76,6 +79,7 @@ function App() {
     }
   }, [loggedIn]);
 
+  //Обработчик регистрации в системе.
   const handleRegistration = (data) => {
     setIsLoading(true);
     MainApi.signUp(data)
@@ -95,6 +99,7 @@ function App() {
       });
   };
 
+  //Обработчик выхода
   const handleExit = () => {
     setIsLoading(true);
     MainApi.signOut().then(
@@ -110,6 +115,7 @@ function App() {
       });
   };
 
+  //Обработчик авторизации
   const handleAuthorization = (data) => {
     setIsLoading(true);
     MainApi.signIn(data)
@@ -129,6 +135,7 @@ function App() {
       });
   };
 
+  //Обработчик обновления данных пользователя
   const handleUpdateUser = (data) => {
     setIsLoading(true);
     MainApi.setUserData(data)
@@ -144,6 +151,7 @@ function App() {
       });
   };
 
+  //Обработчик получения всех фильмов со стороннего ресурса.
   const handleSearchAllMovies = (text = "") => {
     setIsLoading(true);
     MoviesApi.getMoviesList()
@@ -191,6 +199,7 @@ function App() {
       });
   };
 
+  //Фильтрация всех фильмов.
   const handleFilterAllMovies = ({ short = false }) => {
     if (localStorage.getItem("allMovies")) {
       setIsLoading(true);
@@ -205,10 +214,12 @@ function App() {
     }
   };
 
+  //Обработчик поиска пользовательских фильмов
   const handleSearchUsersMovies = (text = "") => {
     setUsersMovieSearchText(text);
   };
 
+  //Обработчик изменения фильтров
   const handleChangeFilters = ({ key, value }) => {
     setFilters(prev => {
       handleFilterAllMovies({ ...prev, [key]: value });
@@ -216,6 +227,7 @@ function App() {
     });
   };
 
+  //Обработчик добалвения новых рядов в списке карточек фильмов
   const handleIncCountOfCards = () => {
     setCountCards(prev => {
         return prev + (window.screen.width > 768 ? 3 : 2);
@@ -223,6 +235,7 @@ function App() {
     );
   };
 
+  //Обработчик добавления фильма в избранное
   const handleSaveMovieCard = (data) => {
     setIsLoading(true);
     MainApi.addMovies(data)
@@ -240,6 +253,7 @@ function App() {
       });
   };
 
+  //Обработчик удаления фильма из избранного
   const handleDeleteMovieCard = (movieId) => {
     const id = usersMoviesCards.find(item => item.movieId === movieId)._id;
     setIsLoading(true);
@@ -257,6 +271,7 @@ function App() {
       });
   };
 
+  //Выделение пользовательских фильмов с учетом фильтров. Не вижу смысла орагинзовывать для них отдельный стейт.
   const filteredUsersMoviesCards = usersMoviesCards.filter(item => {
     if (filters.short && item.duration > 40) {
       return false;
