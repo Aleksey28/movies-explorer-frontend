@@ -1,7 +1,6 @@
 import React from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router";
-import { moviesApiSettings } from "../../../utils/constants";
 
 function MoviesCard({ data, saved, onSaveMovieCard, onDeleteMovieCard }) {
   const {
@@ -9,7 +8,7 @@ function MoviesCard({ data, saved, onSaveMovieCard, onDeleteMovieCard }) {
     image,
     trailer,
     nameRU,
-    movieId
+    movieId,
   } = data;
   const { pathname } = useLocation();
 
@@ -21,7 +20,6 @@ function MoviesCard({ data, saved, onSaveMovieCard, onDeleteMovieCard }) {
     }
   };
 
-
   return (
     <div className="card">
       <div className="card__header">
@@ -29,7 +27,7 @@ function MoviesCard({ data, saved, onSaveMovieCard, onDeleteMovieCard }) {
         <p className="card__time">{duration} минут</p>
       </div>
       <a href={trailer} target="_blank">
-        <img src={image ? `${moviesApiSettings.baseUrl}${image.url}` : "#"}
+        <img src={image ? image : "#"}
              alt="Изображение фильма."
              className="card__image"/>
       </a>
