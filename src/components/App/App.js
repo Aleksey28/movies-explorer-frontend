@@ -14,6 +14,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import MoviesApi from "../../utils/MoviesApi";
 import MainApi from "../../utils/MainApi";
 import { moviesApiSettings } from "../../utils/constants";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,13 +30,17 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
+    setIsLoading(true);
     MainApi
       .getUserData()
       .then((data) => {
         setLoggedIn(true);
         setCurrentUser(data);
       })
-      .catch(console.log);
+      .catch(console.log)
+      .finally(() => {
+        setIsLoading(false);
+      });
 
     if (localStorage.getItem("allMovies")) {
       setMoviesCards(JSON.parse(localStorage.getItem("allMovies")));
@@ -81,9 +86,13 @@ function App() {
   };
 
   const handleExit = () => {
+    setIsLoading(true);
     MainApi.signOut().then(
-      () => {setLoggedIn(false);},
-    );
+      () => {setLoggedIn(false);})
+      .catch(console.log)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleAuthorization = (data) => {
@@ -112,8 +121,10 @@ function App() {
   };
 
   const handleSearchAllMovies = (text = "") => {
+    setIsLoading(true);
     MoviesApi.getMoviesList()
       .then((data) => {
+        console.log(data);
         const allMovies = data
           .filter(item => {
             for (let key in item) {
@@ -150,16 +161,21 @@ function App() {
         localStorage.setItem("allMovies", JSON.stringify(allMovies));
         handleFilterAllMovies(filters);
       })
-      .catch(console.log);
+      .catch(console.log)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleFilterAllMovies = ({ short = false }) => {
     if (localStorage.getItem("allMovies")) {
+      setIsLoading(true);
       const filteredMovies = JSON.parse(localStorage.getItem("allMovies"))
         .filter(item => {
           return !(short && item.duration > 40);
         });
       setMoviesCards(filteredMovies);
+      setIsLoading(false);
     } else {
       handleSearchAllMovies("");
     }
@@ -184,20 +200,28 @@ function App() {
   };
 
   const handleSaveMovieCard = (data) => {
+    setIsLoading(true);
     MainApi.addMovies(data)
       .then((res) => {
         setUsersMoviesCards(prev => ([...prev, res]));
       })
-      .catch(console.log);
+      .catch(console.log)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleDeleteMovieCard = (movieId) => {
     const id = usersMoviesCards.find(item => item.movieId === movieId)._id;
+    setIsLoading(true);
     MainApi.deleteMovies(id)
       .then(() => {
         setUsersMoviesCards(prev => prev.filter(item => item._id !== id));
       })
-      .catch(console.log);
+      .catch(console.log)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const filteredUsersMoviesCards = usersMoviesCards.filter(item => {
@@ -269,6 +293,8 @@ function App() {
             </Switch>
           </Route>
         </Switch>
+        {isLoading && <Preloader/>}
+        {/*<Preloader/>*/}
       </div>
     </CurrentUserContext.Provider>
   );
