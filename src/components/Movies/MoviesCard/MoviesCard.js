@@ -5,38 +5,23 @@ import { moviesApiSettings } from "../../../utils/constants";
 
 function MoviesCard({ data, onSaveMovieCard, onDeleteMovieCard }) {
   const {
-    country,
-    director,
     duration,
-    year,
-    description,
     image,
-    trailerLink,
-    id,
+    trailer,
+    saved = true,
     nameRU,
-    nameEN,
+    movieId
   } = data;
   const { pathname } = useLocation();
 
   const handleClick = () => {
-    if (true) {
-      onSaveMovieCard({
-        country,
-        director,
-        duration,
-        year,
-        description,
-        image: image ? `${moviesApiSettings.baseUrl}${image.url}` : "",
-        trailer: trailerLink,
-        movieId: id,
-        nameRU,
-        nameEN,
-        thumbnail: image ? `${moviesApiSettings.baseUrl}${image.url}` : "#",
-      });
+    if (!saved) {
+      onSaveMovieCard(data);
     } else {
-      onDeleteMovieCard(id);
+      onDeleteMovieCard(movieId);
     }
   };
+
 
   return (
     <div className="card">
@@ -44,7 +29,7 @@ function MoviesCard({ data, onSaveMovieCard, onDeleteMovieCard }) {
         <p className="card__title">{nameRU}</p>
         <p className="card__time">{duration} минут</p>
       </div>
-      <a href={trailerLink} target="_blank">
+      <a href={trailer} target="_blank">
         <img src={image ? `${moviesApiSettings.baseUrl}${image.url}` : "#"}
              alt="Изображение фильма."
              className="card__image"/>
@@ -52,11 +37,11 @@ function MoviesCard({ data, onSaveMovieCard, onDeleteMovieCard }) {
       <button
         className={
           `card__btn 
-          ${true && pathname === "/movies" && "card__btn_color_pink"}
-          ${true && (pathname === "/movies" ? "card__btn_type_check" : "card__btn_type_cross")}`
+          ${saved && pathname === "/movies" && "card__btn_color_pink"}
+          ${saved && (pathname === "/movies" ? "card__btn_type_check" : "card__btn_type_cross")}`
         }
         onClick={handleClick}
-      >{!true && pathname === "/movies"
+      >{!saved && pathname === "/movies"
         ? "Сохранить"
         : ""}</button>
     </div>

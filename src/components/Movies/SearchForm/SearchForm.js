@@ -1,63 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchForm.css";
-import Form, { Field, Submit } from "../../Form/Form";
-import { propsSearch } from "../../../utils/constants";
 
-function SearchForm({ searchMovies }) {
+function SearchForm({ onSearchMovies, onFilterMovies }) {
 
-  const [filters, setFilters] = useState({
-    short: false,
-  });
+  const [filters, setFilters] = useState({});
 
-  const handleSubmit = (data) => {
-    searchMovies({ ...data, ...filters });
+  const [searchText, setSearchText] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearchMovies(searchText, filters);
   };
 
+  const handleChangeSearchText = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const handleChangeFilter = (e) => {
+    setFilters(prev => ({ ...prev, [e.target.name]: !prev[e.target.name] }));
+  };
+
+  useEffect(() => {
+    if (Object.keys(filters).length > 0) {
+      onFilterMovies(filters);
+    }
+  }, [filters, onFilterMovies]);
+
   return (
-    <Form
-      className="search"
-      name="search"
-      onSubmit={handleSubmit}
-      validators={propsSearch.validators}
-      defaultValues={propsSearch.defaultValues}
-      isOpen={true}>
+    <form className="search" name="search" onSubmit={handleSubmit}>
       <div className="search__container search__container_type_query">
-        <Field key="search-text" name="text">
-          {
-            ({ isInvalid, errorMessage, ...inputProps }) => {
-              return (
-                <input
-                  className={`search__text ${isInvalid ? "search__text_error" : ""} `}
-                  type="text"
-                  placeholder={(isInvalid && errorMessage) || "Ключевое слолво"}
-                  {...inputProps}/>
-              );
-            }
-          }
-        </Field>
-        <Submit>
-          {
-            ({ disabled }) => (
-              <button
-                className={`search__btn ${disabled ? "search__btn_disabled" : ""} `}
-                type="submit"
-                disabled={disabled}>
-                Поиск
-              </button>
-            )
-          }
-        </Submit>
+        <input
+          name="text"
+          className="search__text"
+          type="text"
+          value={searchText}
+          onChange={handleChangeSearchText}
+          required/>
+        <button
+          className="search__btn"
+          type="submit">
+          Поиск
+        </button>
       </div>
       <div className="search__container search__container_type_filter">
         <label>
-          <input type="checkbox"
-                 className="search__filter"
-                 onChange={() => {setFilters((prev) => ({ ...prev, short: !prev.short }));}}/>
+          <input
+            name="short"
+            type="checkbox"
+            className="search__filter"
+            onChange={handleChangeFilter}/>
           <span className="search__visible-filter"/>
         </label>
         <label className="search__label">Короткометражки</label>
       </div>
-    </Form>
+    </form>
   );
 }
 

@@ -170,22 +170,6 @@ export const propsProfile = {
   },
 };
 
-export const propsSearch = {
-  defaultValues: {
-    text: "",
-  },
-  validators: {
-    text: {
-      required: (value) => {
-        return {
-          valid: !!value,
-          message: "Нужно ввести ключевое слово.",
-        };
-      },
-    },
-  },
-};
-
 export const propsAuthLogIn = {
   inputsList: [
     { name: "email", label: "E-mail", type: "text" },

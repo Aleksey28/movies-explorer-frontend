@@ -99,7 +99,7 @@ class MainApi extends Api {
 
   async deleteMovies(id) {
     const params = {
-      relativePath: `/cards/${id}`,
+      relativePath: `/movies/${id}`,
       method: "DELETE",
     };
     const response = await this._getProxy(params);
