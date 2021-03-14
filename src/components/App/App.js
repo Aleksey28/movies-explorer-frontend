@@ -124,7 +124,6 @@ function App() {
     setIsLoading(true);
     MoviesApi.getMoviesList()
       .then((data) => {
-        console.log(data);
         const allMovies = data
           .filter(item => {
             for (let key in item) {

@@ -90,7 +90,8 @@ export default function Form({
       }
     }
     setIsInvalid(Object.keys(formValues).length !== Object.keys(formErrors).length);
-  }, [formErrors]);
+    setIsInvalid(Object.keys(formValues).every(key => formValues[key] === defaultValues[key]));
+  }, [formValues, formErrors, defaultValues]);
 
   //Заполняем контекст формы
   const formContextValue = { onChangeInput, isInvalid, formErrors, showErrors, formValues };

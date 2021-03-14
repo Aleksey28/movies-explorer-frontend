@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Profile({ onUpdateUser, onExit }) {
 
-  const currentUser = useContext(CurrentUserContext);
+  const { name, email } = useContext(CurrentUserContext);
 
   const fieldList = propsProfile.inputsList.map(item => (
       <Field key={`profile-${item.name}`} name={item.name}>
@@ -37,10 +37,10 @@ function Profile({ onUpdateUser, onExit }) {
       name="profile"
       onSubmit={onUpdateUser}
       validators={propsProfile.validators}
-      defaultValues={currentUser}
+      defaultValues={{ name, email }}
       isOpen={true}
     >
-      <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+      <h2 className="profile__title">Привет, {name}!</h2>
       <fieldset className="profile__fieldset">
         {fieldList}
       </fieldset>
