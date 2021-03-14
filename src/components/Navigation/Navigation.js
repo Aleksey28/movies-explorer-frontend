@@ -33,7 +33,9 @@ function Navigation({ openNavigation, onCloseNavigation }) {
                    activeClassName="navigation__link_active"
                    to={"/saved-movies"}>Сохраненные фильмы</NavLink>
         </li>
-        <li className="navigation__item navigation__item_type_profile">
+        <li
+          className="navigation__item navigation__item_type_profile"
+          onClick={onCloseNavigation}>
           <NavLink className="navigation__link navigation__link_type_profile" to="/profile">
             Аккаунт
             <img src={ProfileIcon} alt="Переход к профилю."/>
