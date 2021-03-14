@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
 
-function SearchForm({ onSearchMovies, onFilterMovies }) {
+function SearchForm({ onSearchMovies, onChangeFilters }) {
 
   const [filters, setFilters] = useState({});
 
@@ -17,14 +17,11 @@ function SearchForm({ onSearchMovies, onFilterMovies }) {
   };
 
   const handleChangeFilter = (e) => {
-    setFilters(prev => ({ ...prev, [e.target.name]: !prev[e.target.name] }));
+    onChangeFilters({
+      key: e.target.name,
+      value: e.target.type === "checkbox" ? e.target.checked : e.target.value,
+    });
   };
-
-  useEffect(() => {
-    if (Object.keys(filters).length > 0) {
-      onFilterMovies(filters);
-    }
-  }, [filters, onFilterMovies]);
 
   return (
     <form className="search" name="search" onSubmit={handleSubmit}>

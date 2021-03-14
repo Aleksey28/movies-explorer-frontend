@@ -5,18 +5,22 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
 function Movies({
   moviesCards,
+  usersMoviesCards,
   countCards,
   onIncCountOfCards,
   onSaveMovieCard,
   onDeleteMovieCard,
   onSearchMovies,
-  onFilterMovies,
+  onChangeFilters,
 }) {
   return (
     <section className="movies">
-      <SearchForm onSearchMovies={onSearchMovies} onFilterMovies={onFilterMovies}/>
+      <SearchForm
+        onSearchMovies={onSearchMovies}
+        onChangeFilters={onChangeFilters}/>
       <MoviesCardList
         moviesCards={moviesCards}
+        usersMoviesCards={usersMoviesCards}
         countCards={countCards}
         onSaveMovieCard={onSaveMovieCard}
         onDeleteMovieCard={onDeleteMovieCard}/>

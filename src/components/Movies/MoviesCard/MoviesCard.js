@@ -3,12 +3,11 @@ import "./MoviesCard.css";
 import { useLocation } from "react-router";
 import { moviesApiSettings } from "../../../utils/constants";
 
-function MoviesCard({ data, onSaveMovieCard, onDeleteMovieCard }) {
+function MoviesCard({ data, saved, onSaveMovieCard, onDeleteMovieCard }) {
   const {
     duration,
     image,
     trailer,
-    saved = true,
     nameRU,
     movieId
   } = data;

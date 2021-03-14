@@ -19,10 +19,12 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [moviesCards, setMoviesCards] = useState([]);
-  const [savedMoviesCards, setSavedMoviesCards] = useState([]);
+  const [usersMoviesCards, setUsersMoviesCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [countCards, setCountCards] = useState(window.screen.width > 768 ? 12 : window.screen.width > 400 ? 8 : 5);
   const [currentViewportWidth, setCurrentViewportWidth] = useState(window.screen.width);
+  const [filters, setFilters] = useState({});
+  const [usersMovieSearchText, setUsersMovieSearchText] = useState("");
   const { pathname } = useLocation();
   const history = useHistory();
 
@@ -35,8 +37,8 @@ function App() {
       })
       .catch(console.log);
 
-    if (localStorage.getItem("searchedMovies")) {
-      setMoviesCards(JSON.parse(localStorage.getItem("searchedMovies")));
+    if (localStorage.getItem("allMovies")) {
+      setMoviesCards(JSON.parse(localStorage.getItem("allMovies")));
     }
   }, []);
 
@@ -58,19 +60,12 @@ function App() {
     if (loggedIn) {
       MainApi.getMoviesList()
         .then((data) => {
-          setSavedMoviesCards(data);
+          setUsersMoviesCards(data);
           history.push("/movies");
         })
         .catch(console.log);
     }
   }, [history, loggedIn]);
-
-  useEffect(() => {
-    setMoviesCards(prev => prev.map(item => ({
-      ...item,
-      saved: savedMoviesCards.some(savedItem => savedItem.movieId === item.movieId),
-    })));
-  }, [savedMoviesCards]);
 
   const handleRegistration = (data) => {
     setIsLoading(true);
@@ -86,8 +81,9 @@ function App() {
   };
 
   const handleExit = () => {
-    MainApi.signOut();
-    setLoggedIn(false);
+    MainApi.signOut().then(
+      () => {setLoggedIn(false);},
+    );
   };
 
   const handleAuthorization = (data) => {
@@ -115,10 +111,10 @@ function App() {
       });
   };
 
-  const handleSearchMovies = (text = "", filters) => {
+  const handleSearchAllMovies = (text = "") => {
     MoviesApi.getMoviesList()
       .then((data) => {
-        const searchedMovies = data
+        const allMovies = data
           .filter(item => {
             for (let key in item) {
               if (typeof item[key] === "string" && item[key].toLowerCase().includes(text.toLowerCase())) {
@@ -150,23 +146,34 @@ function App() {
             nameRU,
             nameEN,
             thumbnail: image ? `${moviesApiSettings.baseUrl}${image.url}` : "#",
-            saved: savedMoviesCards.some(item => item._id === id),
           }));
-        localStorage.setItem("searchedMovies", JSON.stringify(searchedMovies));
-        handleFilterMovies(filters);
+        localStorage.setItem("allMovies", JSON.stringify(allMovies));
+        handleFilterAllMovies(filters);
       })
       .catch(console.log);
   };
 
-  const handleFilterMovies = ({ short = false }) => {
-    if (localStorage.getItem("searchedMovies")) {
-      const filteredMovies = JSON.parse(localStorage.getItem("searchedMovies")).filter(item => {
-        return !(short && item.duration > 40);
-      });
+  const handleFilterAllMovies = ({ short = false }) => {
+    if (localStorage.getItem("allMovies")) {
+      const filteredMovies = JSON.parse(localStorage.getItem("allMovies"))
+        .filter(item => {
+          return !(short && item.duration > 40);
+        });
       setMoviesCards(filteredMovies);
     } else {
-      handleSearchMovies("", { short });
+      handleSearchAllMovies("");
     }
+  };
+
+  const handleSearchUsersMovies = (text = "") => {
+    setUsersMovieSearchText(text);
+  };
+
+  const handleChangeFilters = ({ key, value }) => {
+    setFilters(prev => {
+      handleFilterAllMovies({ ...prev, [key]: value });
+      return { ...prev, [key]: value };
+    });
   };
 
   const handleIncCountOfCards = () => {
@@ -179,19 +186,34 @@ function App() {
   const handleSaveMovieCard = (data) => {
     MainApi.addMovies(data)
       .then((res) => {
-        setSavedMoviesCards(prev => ([...prev, res]));
+        setUsersMoviesCards(prev => ([...prev, res]));
       })
       .catch(console.log);
   };
 
   const handleDeleteMovieCard = (movieId) => {
-    const id = savedMoviesCards.find(item => item.movieId === movieId)._id;
+    const id = usersMoviesCards.find(item => item.movieId === movieId)._id;
     MainApi.deleteMovies(id)
       .then(() => {
-        setSavedMoviesCards(prev => prev.filter(item => item._id !== id));
+        setUsersMoviesCards(prev => prev.filter(item => item._id !== id));
       })
       .catch(console.log);
   };
+
+  const filteredUsersMoviesCards = usersMoviesCards.filter(item => {
+    if (filters.short && item.duration > 40) {
+      return false;
+    }
+    if (!usersMovieSearchText) {
+      return true;
+    }
+    for (let key in item) {
+      if (typeof item[key] === "string" && item[key].toLowerCase().includes(usersMovieSearchText.toLowerCase())) {
+        return true;
+      }
+    }
+    return false;
+  });
 
   return (
     <CurrentUserContext.Provider value={{ ...currentUser }}>
@@ -217,21 +239,23 @@ function App() {
               <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                 <Movies
                   moviesCards={moviesCards}
+                  usersMoviesCards={usersMoviesCards}
                   countCards={countCards}
                   onSaveMovieCard={handleSaveMovieCard}
                   onDeleteMovieCard={handleDeleteMovieCard}
                   onIncCountOfCards={handleIncCountOfCards}
-                  onSearchMovies={handleSearchMovies}
-                  onFilterMovies={handleFilterMovies}/>
+                  onSearchMovies={handleSearchAllMovies}
+                  onChangeFilters={handleChangeFilters}/>
               </ProtectedRoute>
               <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
                 <Movies
-                  moviesCards={savedMoviesCards}
+                  moviesCards={filteredUsersMoviesCards}
+                  usersMoviesCards={usersMoviesCards}
                   countCards={countCards}
                   onDeleteMovieCard={handleDeleteMovieCard}
                   handleIncCountOfCards={handleIncCountOfCards}
-                  onSearchMovies={handleSearchMovies}
-                  onFilterMovies={handleFilterMovies}/>
+                  onSearchMovies={handleSearchUsersMovies}
+                  onChangeFilters={handleChangeFilters}/>
               </ProtectedRoute>
               <ProtectedRoute path="/profile" loggedIn={loggedIn}>
                 <Profile onUpdateUser={handleUpdateUser} onExit={handleExit}/>
