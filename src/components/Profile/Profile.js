@@ -1,4 +1,4 @@
-import { propsProfile } from "../../utils/constants";
+import { PROPS_PROFILE } from "../../utils/constants";
 import React, { useContext } from "react";
 import "./Profile.css";
 import Form, { Field, Submit } from "../Form/Form";
@@ -8,7 +8,7 @@ function Profile({ onUpdateUser, onExit }) {
 
   const { name, email } = useContext(CurrentUserContext);
 
-  const fieldList = propsProfile.inputsList.map(item => (
+  const fieldList = PROPS_PROFILE.inputsList.map(item => (
       <Field key={`profile-${item.name}`} name={item.name}>
         {
           ({ isInvalid, errorMessage, ...inputProps }) => {
@@ -36,7 +36,7 @@ function Profile({ onUpdateUser, onExit }) {
       className="profile"
       name="profile"
       onSubmit={onUpdateUser}
-      validators={propsProfile.validators}
+      validators={PROPS_PROFILE.validators}
       defaultValues={{ name, email }}
       isOpen={true}
     >

@@ -1,4 +1,4 @@
-import { mainApiSettings } from "./constants";
+import { MAIN_API_SETTINGS } from "./constants";
 import Api from "./Api";
 
 class MainApi extends Api {
@@ -107,4 +107,4 @@ class MainApi extends Api {
   }
 }
 
-export default new MainApi(mainApiSettings);
+export default new MainApi(MAIN_API_SETTINGS);

@@ -1,4 +1,4 @@
-import { moviesApiSettings } from "./constants";
+import { MOVIES_API_SETTINGS } from "./constants";
 import Api from "./Api";
 
 class MoviesApi extends Api {
@@ -16,4 +16,4 @@ class MoviesApi extends Api {
   }
 }
 
-export default new MoviesApi(moviesApiSettings);
+export default new MoviesApi(MOVIES_API_SETTINGS);

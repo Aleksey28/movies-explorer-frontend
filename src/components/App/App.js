@@ -13,7 +13,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import MoviesApi from "../../utils/MoviesApi";
 import MainApi from "../../utils/MainApi";
-import { moviesApiSettings } from "../../utils/constants";
+import { MOVIES_API_SETTINGS } from "../../utils/constants";
 import Preloader from "../Preloader/Preloader";
 
 function App() {
@@ -175,12 +175,12 @@ function App() {
             duration,
             year,
             description,
-            image: image ? `${moviesApiSettings.baseUrl}${image.url}` : "",
+            image: image ? `${MOVIES_API_SETTINGS.baseUrl}${image.url}` : "",
             trailer: trailerLink,
             movieId: id,
             nameRU,
             nameEN,
-            thumbnail: image ? `${moviesApiSettings.baseUrl}${image.url}` : "#",
+            thumbnail: image ? `${MOVIES_API_SETTINGS.baseUrl}${image.url}` : "#",
           }));
         localStorage.setItem("allMovies", JSON.stringify(allMovies));
         handleFilterAllMovies(filters);

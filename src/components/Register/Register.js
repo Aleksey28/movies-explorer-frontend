@@ -1,10 +1,10 @@
 import Auth from "../Auth/Auth";
 import React from "react";
-import { propsAuthRegister } from "../../utils/constants";
+import { PROPS_REGISTRATIONS } from "../../utils/constants";
 
 function Register({ onRegistration }) {
   return (
-    <Auth {...propsAuthRegister} onSubmit={onRegistration}/>
+    <Auth {...PROPS_REGISTRATIONS} onSubmit={onRegistration}/>
   );
 }
 
