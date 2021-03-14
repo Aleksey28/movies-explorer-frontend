@@ -74,7 +74,7 @@ function App() {
           setIsLoading(false);
         });
     }
-  }, [history, loggedIn]);
+  }, [loggedIn]);
 
   const handleRegistration = (data) => {
     setIsLoading(true);
@@ -85,7 +85,7 @@ function App() {
         history.push("/movies");
       })
       .catch(({ status, message }) => {
-          debugger;
+
           setError({ status, message });
           history.push("/error");
         },
@@ -97,11 +97,10 @@ function App() {
 
   const handleExit = () => {
     setIsLoading(true);
-    debugger;
     MainApi.signOut().then(
       () => {setLoggedIn(false);})
       .catch(({ status, message }) => {
-          debugger;
+
           setError({ status, message });
           history.push("/error");
         },
@@ -120,7 +119,7 @@ function App() {
         history.push("/movies");
       })
       .catch(({ status, message }) => {
-          debugger;
+
           setError({ status, message });
           history.push("/error");
         },
@@ -137,7 +136,6 @@ function App() {
         setCurrentUser(res);
       })
       .catch(({ status, message }) => {
-        debugger;
         setError({ status, message });
         history.push("/error");
       })
@@ -232,7 +230,7 @@ function App() {
         setUsersMoviesCards(prev => ([...prev, res]));
       })
       .catch(({ status, message }) => {
-          debugger;
+
           setError({ status, message });
           history.push("/error");
         },
@@ -250,7 +248,6 @@ function App() {
         setUsersMoviesCards(prev => prev.filter(item => item._id !== id));
       })
       .catch(({ status, message }) => {
-          debugger;
           setError({ status, message });
           history.push("/error");
         },
@@ -294,7 +291,7 @@ function App() {
           <Route exact path="/">
             <Main/>
           </Route>
-          <ProtectedRoute path="/movies" loggedIn={loggedIn}>
+          <ProtectedRoute path="/movies" condition={loggedIn} to="/signin">
             <Movies
               moviesCards={moviesCards}
               usersMoviesCards={usersMoviesCards}
@@ -305,7 +302,7 @@ function App() {
               onSearchMovies={handleSearchAllMovies}
               onChangeFilters={handleChangeFilters}/>
           </ProtectedRoute>
-          <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
+          <ProtectedRoute path="/saved-movies" condition={loggedIn} to="/signin">
             <Movies
               moviesCards={filteredUsersMoviesCards}
               usersMoviesCards={usersMoviesCards}
@@ -315,15 +312,15 @@ function App() {
               onSearchMovies={handleSearchUsersMovies}
               onChangeFilters={handleChangeFilters}/>
           </ProtectedRoute>
-          <ProtectedRoute path="/profile" loggedIn={loggedIn}>
+          <ProtectedRoute path="/profile" condition={loggedIn} to="/signin">
             <Profile onUpdateUser={handleUpdateUser} onExit={handleExit}/>
           </ProtectedRoute>
-          <Route path="/signin">
+          <ProtectedRoute path="/signin" condition={!loggedIn} to="/">
             <Login onAuthorization={handleAuthorization}/>
-          </Route>
-          <Route path="/signup">
+          </ProtectedRoute>
+          <ProtectedRoute path="/signup" condition={!loggedIn} to="/">
             <Register onRegistration={handleRegistration}/>
-          </Route>
+          </ProtectedRoute>
           <Route path="/error">
             <Error message={error.message} status={error.status}/>
           </Route>
