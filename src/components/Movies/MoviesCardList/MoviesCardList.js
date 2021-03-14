@@ -13,11 +13,10 @@ function MoviesCardList({ moviesCards, usersMoviesCards, countCards, onSaveMovie
           onDeleteMovieCard={onDeleteMovieCard}/>
       </li>
     ));
-  return (
-    <ul className="cards">
-      {cardElements}
-    </ul>
-  );
+  return cardElements.length > 0
+         ? <ul className="cards">{cardElements}</ul>
+         : <p className="cards__not-found">Ничего не найдено</p>;
+
 }
 
 export default MoviesCardList;

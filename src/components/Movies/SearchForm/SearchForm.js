@@ -3,13 +3,11 @@ import "./SearchForm.css";
 
 function SearchForm({ onSearchMovies, onChangeFilters }) {
 
-  const [filters, setFilters] = useState({});
-
   const [searchText, setSearchText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearchMovies(searchText, filters);
+    onSearchMovies(searchText);
   };
 
   const handleChangeSearchText = (e) => {

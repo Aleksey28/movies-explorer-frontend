@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
-import { Route, Switch, useHistory, useLocation } from "react-router";
+import { Redirect, Route, Switch, useHistory, useLocation } from "react-router";
 import Footer from "../Footer/Footer";
 import Error from "../Error/Error";
 import Login from "../Login/Login";
@@ -27,6 +27,7 @@ function App() {
   const [filters, setFilters] = useState({});
   const [usersMovieSearchText, setUsersMovieSearchText] = useState("");
   const { pathname } = useLocation();
+  const [error, setError] = useState({});
   const history = useHistory();
 
   useEffect(() => {
@@ -63,12 +64,15 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
+      setIsLoading(true);
       MainApi.getMoviesList()
         .then((data) => {
           setUsersMoviesCards(data);
-          history.push("/movies");
         })
-        .catch(console.log);
+        .catch(console.log)
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   }, [history, loggedIn]);
 
@@ -78,8 +82,14 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
+        history.push("/movies");
       })
-      .catch(console.log)
+      .catch(({ status, message }) => {
+          debugger;
+          setError({ status, message });
+          history.push("/error");
+        },
+      )
       .finally(() => {
         setIsLoading(false);
       });
@@ -87,9 +97,15 @@ function App() {
 
   const handleExit = () => {
     setIsLoading(true);
+    debugger;
     MainApi.signOut().then(
       () => {setLoggedIn(false);})
-      .catch(console.log)
+      .catch(({ status, message }) => {
+          debugger;
+          setError({ status, message });
+          history.push("/error");
+        },
+      )
       .finally(() => {
         setIsLoading(false);
       });
@@ -101,8 +117,14 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
+        history.push("/movies");
       })
-      .catch(console.log)
+      .catch(({ status, message }) => {
+          debugger;
+          setError({ status, message });
+          history.push("/error");
+        },
+      )
       .finally(() => {
         setIsLoading(false);
       });
@@ -114,7 +136,11 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
       })
-      .catch(console.log)
+      .catch(({ status, message }) => {
+        debugger;
+        setError({ status, message });
+        history.push("/error");
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -127,7 +153,8 @@ function App() {
         const allMovies = data
           .filter(item => {
             for (let key in item) {
-              if (typeof item[key] === "string" && item[key].toLowerCase().includes(text.toLowerCase())) {
+              if (item.hasOwnProperty(key) && typeof item[key] === "string" &&
+                item[key].toLowerCase().includes(text.toLowerCase())) {
                 return true;
               }
             }
@@ -204,7 +231,12 @@ function App() {
       .then((res) => {
         setUsersMoviesCards(prev => ([...prev, res]));
       })
-      .catch(console.log)
+      .catch(({ status, message }) => {
+          debugger;
+          setError({ status, message });
+          history.push("/error");
+        },
+      )
       .finally(() => {
         setIsLoading(false);
       });
@@ -217,7 +249,12 @@ function App() {
       .then(() => {
         setUsersMoviesCards(prev => prev.filter(item => item._id !== id));
       })
-      .catch(console.log)
+      .catch(({ status, message }) => {
+          debugger;
+          setError({ status, message });
+          history.push("/error");
+        },
+      )
       .finally(() => {
         setIsLoading(false);
       });
@@ -231,7 +268,8 @@ function App() {
       return true;
     }
     for (let key in item) {
-      if (typeof item[key] === "string" && item[key].toLowerCase().includes(usersMovieSearchText.toLowerCase())) {
+      if (item.hasOwnProperty(key) && typeof item[key] === "string" &&
+        item[key].toLowerCase().includes(usersMovieSearchText.toLowerCase())) {
         return true;
       }
     }
@@ -241,59 +279,67 @@ function App() {
   return (
     <CurrentUserContext.Provider value={{ ...currentUser }}>
       <div className="page">
+        {/*Не выводим шапук на странице регистрации, авторизации и ошибки*/}
         <Switch>
-          <Route path="/error">
-            <Error/>
+          <Route path="/error"/>
+          <Route path="/signin"/>
+          <Route path="/signup"/>
+          <Route path="/">
+            <div className={`page__container ${pathname === "/" && "page__container_color_blue"}`}>
+              <Header loggedIn={loggedIn}/>
+            </div>
           </Route>
+        </Switch>
+        <Switch>
+          <Route exact path="/">
+            <Main/>
+          </Route>
+          <ProtectedRoute path="/movies" loggedIn={loggedIn}>
+            <Movies
+              moviesCards={moviesCards}
+              usersMoviesCards={usersMoviesCards}
+              countCards={countCards}
+              onSaveMovieCard={handleSaveMovieCard}
+              onDeleteMovieCard={handleDeleteMovieCard}
+              onIncCountOfCards={handleIncCountOfCards}
+              onSearchMovies={handleSearchAllMovies}
+              onChangeFilters={handleChangeFilters}/>
+          </ProtectedRoute>
+          <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
+            <Movies
+              moviesCards={filteredUsersMoviesCards}
+              usersMoviesCards={usersMoviesCards}
+              countCards={countCards}
+              onDeleteMovieCard={handleDeleteMovieCard}
+              handleIncCountOfCards={handleIncCountOfCards}
+              onSearchMovies={handleSearchUsersMovies}
+              onChangeFilters={handleChangeFilters}/>
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile" loggedIn={loggedIn}>
+            <Profile onUpdateUser={handleUpdateUser} onExit={handleExit}/>
+          </ProtectedRoute>
           <Route path="/signin">
             <Login onAuthorization={handleAuthorization}/>
           </Route>
           <Route path="/signup">
             <Register onRegistration={handleRegistration}/>
           </Route>
+          <Route path="/error">
+            <Error message={error.message} status={error.status}/>
+          </Route>
+          <Redirect to="/error"/>
+        </Switch>
+        {/*Не выводим шапук на странице профиля, регистрации, авторизации и ошибки*/}
+        <Switch>
+          <Route path="/profile"/>
+          <Route path="/error"/>
+          <Route path="/signin"/>
+          <Route path="/signup"/>
           <Route path="/">
-            <div className={`page__container ${pathname === "/" && "page__container_color_blue"}`}>
-              <Header loggedIn={loggedIn}/>
-            </div>
-            <Switch>
-              <Route exact path="/">
-                <Main/>
-              </Route>
-              <ProtectedRoute path="/movies" loggedIn={loggedIn}>
-                <Movies
-                  moviesCards={moviesCards}
-                  usersMoviesCards={usersMoviesCards}
-                  countCards={countCards}
-                  onSaveMovieCard={handleSaveMovieCard}
-                  onDeleteMovieCard={handleDeleteMovieCard}
-                  onIncCountOfCards={handleIncCountOfCards}
-                  onSearchMovies={handleSearchAllMovies}
-                  onChangeFilters={handleChangeFilters}/>
-              </ProtectedRoute>
-              <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
-                <Movies
-                  moviesCards={filteredUsersMoviesCards}
-                  usersMoviesCards={usersMoviesCards}
-                  countCards={countCards}
-                  onDeleteMovieCard={handleDeleteMovieCard}
-                  handleIncCountOfCards={handleIncCountOfCards}
-                  onSearchMovies={handleSearchUsersMovies}
-                  onChangeFilters={handleChangeFilters}/>
-              </ProtectedRoute>
-              <ProtectedRoute path="/profile" loggedIn={loggedIn}>
-                <Profile onUpdateUser={handleUpdateUser} onExit={handleExit}/>
-              </ProtectedRoute>
-            </Switch>
-            <Switch>
-              <ProtectedRoute path="/profile" loggedIn={loggedIn}/>
-              <Route path="/">
-                <Footer/>
-              </Route>
-            </Switch>
+            <Footer/>
           </Route>
         </Switch>
         {isLoading && <Preloader/>}
-        {/*<Preloader/>*/}
       </div>
     </CurrentUserContext.Provider>
   );

@@ -84,7 +84,7 @@ export default function Form({
     for (const fileKey in formErrors) {
       const keyErrors = formErrors[fileKey];
       for (const errorKey in keyErrors) {
-        if (keyErrors[errorKey].valid === false) {
+        if (keyErrors.hasOwnProperty(errorKey) && keyErrors[errorKey].valid === false) {
           return setIsInvalid(true);
         }
       }

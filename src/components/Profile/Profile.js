@@ -56,7 +56,7 @@ function Profile({ onUpdateUser, onExit }) {
           )
         }
       </Submit>
-      <button className="profile__btn profile__btn_type_exit" onClick={onExit}>Выйти из аккаунта</button>
+      <button className="profile__btn profile__btn_type_exit" type="button" onClick={onExit}>Выйти из аккаунта</button>
     </Form>
   );
 }

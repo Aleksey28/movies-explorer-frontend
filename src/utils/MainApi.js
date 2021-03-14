@@ -44,11 +44,11 @@ class MainApi extends Api {
     return await this._handleResponse(response);
   }
 
-  async setUserData({ name, about }) {
+  async setUserData({ name, email }) {
     const params = {
       relativePath: "/users/me",
       method: "PATCH",
-      body: JSON.stringify({ name, about }),
+      body: JSON.stringify({ name, email }),
     };
     const response = await this._getProxy(params);
     return await this._handleResponse(response);
