@@ -13,7 +13,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import MoviesApi from "../../utils/MoviesApi";
 import MainApi from "../../utils/MainApi";
-import { MOVIES_API_SETTINGS } from "../../utils/constants";
+import { MOVIES_API_SETTINGS, SHORT_MOVIE_MINUTES } from "../../utils/constants";
 import Preloader from "../Preloader/Preloader";
 import InformationPopup from "../InformationPopup/InformationPopup";
 
@@ -208,7 +208,7 @@ function App() {
       setIsLoading(true);
       const filteredMovies = JSON.parse(localStorage.getItem("allMovies"))
         .filter(item => {
-          return !(short && item.duration > 40);
+          return !(short && item.duration > SHORT_MOVIE_MINUTES);
         });
       setMoviesCards(filteredMovies);
       setIsLoading(false);
@@ -276,7 +276,7 @@ function App() {
 
   //Выделение пользовательских фильмов с учетом фильтров. Не вижу смысла орагинзовывать для них отдельный стейт.
   const filteredUsersMoviesCards = usersMoviesCards.filter(item => {
-    if (filters.short && item.duration > 40) {
+    if (filters.short && item.duration > SHORT_MOVIE_MINUTES) {
       return false;
     }
     if (!usersMovieSearchText) {

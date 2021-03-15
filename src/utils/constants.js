@@ -180,3 +180,5 @@ export const MAIN_API_SETTINGS = {
   },
   credentials: "include"
 };
+
+export const SHORT_MOVIE_MINUTES = 40;
