@@ -10,7 +10,6 @@ export const PROPS_PROFILE = {
   validators: {
     name: {
       required: (value) => {
-        debugger;
         return {
           valid: !!value,
           message: "Вы пропустили это поле.",

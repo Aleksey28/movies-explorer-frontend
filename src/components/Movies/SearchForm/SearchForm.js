@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
 
-function SearchForm({ onSearchMovies, onChangeFilters }) {
+function SearchForm({ onChangeFilters }) {
 
   const [searchText, setSearchText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearchMovies(searchText);
+    onChangeFilters({
+      key: "text",
+      value: searchText,
+    });
   };
 
   const handleChangeSearchText = (e) => {

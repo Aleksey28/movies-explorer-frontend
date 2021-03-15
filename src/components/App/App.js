@@ -26,7 +26,6 @@ function App() {
   const [countCards, setCountCards] = useState(window.screen.width > 768 ? 12 : window.screen.width > 400 ? 8 : 5);
   const [currentViewportWidth, setCurrentViewportWidth] = useState(window.screen.width);
   const [filters, setFilters] = useState({});
-  const [usersMovieSearchText, setUsersMovieSearchText] = useState("");
   const { pathname } = useLocation();
   const [error, setError] = useState({});
   const [informationPopupOpenMessage, setInformationPopupMessage] = useState("");
@@ -156,47 +155,53 @@ function App() {
       });
   };
 
-  //Обработчик получения всех фильмов со стороннего ресурса.
-  const handleSearchAllMovies = (text = "") => {
+  //Функция фильтрации
+  const getFilteredMovies = (movies, { text = "", short = false }) => {
+    return movies.filter(item => {
+      if (short && item.duration > SHORT_MOVIE_MINUTES) {
+        return false;
+      }
+      for (let key in item) {
+        if (item.hasOwnProperty(key) && typeof item[key] === "string" &&
+          item[key].toLowerCase().includes(text.toLowerCase())) {
+          return true;
+        }
+      }
+      return false;
+    });
+  };
+
+  //Получаем все фильмы
+  const getAllMovies = () => {
     setIsLoading(true);
     MoviesApi.getMoviesList()
       .then((data) => {
-        const allMovies = data
-          .filter(item => {
-            for (let key in item) {
-              if (item.hasOwnProperty(key) && typeof item[key] === "string" &&
-                item[key].toLowerCase().includes(text.toLowerCase())) {
-                return true;
-              }
-            }
-            return false;
-          })
-          .map(({
-            country,
-            director,
-            duration,
-            year,
-            description,
-            image,
-            trailerLink,
-            id,
-            nameRU,
-            nameEN,
-          }) => ({
-            country,
-            director,
-            duration,
-            year,
-            description,
-            image: image ? `${MOVIES_API_SETTINGS.baseUrl}${image.url}` : "",
-            trailer: trailerLink,
-            movieId: id,
-            nameRU,
-            nameEN,
-            thumbnail: image ? `${MOVIES_API_SETTINGS.baseUrl}${image.url}` : "#",
-          }));
+        const allMovies = data.map(({
+          country,
+          director,
+          duration,
+          year,
+          description,
+          image,
+          trailerLink,
+          id,
+          nameRU,
+          nameEN,
+        }) => ({
+          country,
+          director,
+          duration,
+          year,
+          description,
+          image: image ? `${MOVIES_API_SETTINGS.baseUrl}${image.url}` : "",
+          trailer: trailerLink,
+          movieId: id,
+          nameRU,
+          nameEN,
+          thumbnail: image ? `${MOVIES_API_SETTINGS.baseUrl}${image.url}` : "#",
+        }));
         localStorage.setItem("allMovies", JSON.stringify(allMovies));
-        handleFilterAllMovies(filters);
+        handleFilterAllMovies();
       })
       .catch(console.log)
       .finally(() => {
@@ -205,23 +210,15 @@ function App() {
   };
 
   //Фильтрация всех фильмов.
-  const handleFilterAllMovies = ({ short = false }) => {
+  const handleFilterAllMovies = (filters) => {
     if (localStorage.getItem("allMovies")) {
       setIsLoading(true);
-      const filteredMovies = JSON.parse(localStorage.getItem("allMovies"))
-        .filter(item => {
-          return !(short && item.duration > SHORT_MOVIE_MINUTES);
-        });
+      const filteredMovies = getFilteredMovies(JSON.parse(localStorage.getItem("allMovies")), filters) || [];
       setMoviesCards(filteredMovies);
       setIsLoading(false);
     } else {
-      handleSearchAllMovies("");
+      getAllMovies("");
     }
-  };
-
-  //Обработчик поиска пользовательских фильмов
-  const handleSearchUsersMovies = (text = "") => {
-    setUsersMovieSearchText(text);
   };
 
   //Обработчик изменения фильтров
@@ -276,23 +273,6 @@ function App() {
       });
   };
 
-  //Выделение пользовательских фильмов с учетом фильтров. Не вижу смысла орагинзовывать для них отдельный стейт.
-  const filteredUsersMoviesCards = usersMoviesCards.filter(item => {
-    if (filters.short && item.duration > SHORT_MOVIE_MINUTES) {
-      return false;
-    }
-    if (!usersMovieSearchText) {
-      return true;
-    }
-    for (let key in item) {
-      if (item.hasOwnProperty(key) && typeof item[key] === "string" &&
-        item[key].toLowerCase().includes(usersMovieSearchText.toLowerCase())) {
-        return true;
-      }
-    }
-    return false;
-  });
-
   const handleSubmitInformationPopup = () => {
     setInformationPopupMessage("");
   };
@@ -323,17 +303,15 @@ function App() {
               onSaveMovieCard={handleSaveMovieCard}
               onDeleteMovieCard={handleDeleteMovieCard}
               onIncCountOfCards={handleIncCountOfCards}
-              onSearchMovies={handleSearchAllMovies}
               onChangeFilters={handleChangeFilters}/>
           </ProtectedRoute>
           <ProtectedRoute path="/saved-movies" condition={loggedIn} to="/signin">
             <Movies
-              moviesCards={filteredUsersMoviesCards}
+              moviesCards={getFilteredMovies(usersMoviesCards, filters)}
               usersMoviesCards={usersMoviesCards}
               countCards={countCards}
               onDeleteMovieCard={handleDeleteMovieCard}
               handleIncCountOfCards={handleIncCountOfCards}
-              onSearchMovies={handleSearchUsersMovies}
               onChangeFilters={handleChangeFilters}/>
           </ProtectedRoute>
           <ProtectedRoute path="/profile" condition={loggedIn} to="/signin">

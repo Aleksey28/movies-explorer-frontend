@@ -10,13 +10,11 @@ function Movies({
   onIncCountOfCards,
   onSaveMovieCard,
   onDeleteMovieCard,
-  onSearchMovies,
   onChangeFilters,
 }) {
   return (
     <section className="movies">
       <SearchForm
-        onSearchMovies={onSearchMovies}
         onChangeFilters={onChangeFilters}/>
       <MoviesCardList
         moviesCards={moviesCards}
@@ -24,7 +22,8 @@ function Movies({
         countCards={countCards}
         onSaveMovieCard={onSaveMovieCard}
         onDeleteMovieCard={onDeleteMovieCard}/>
-      {moviesCards.length > countCards && <button className="movies__more" onClick={onIncCountOfCards}>Ещё</button>}
+      {((moviesCards && moviesCards.length) || 0) > countCards &&
+      <button className="movies__more" onClick={onIncCountOfCards}>Ещё</button>}
     </section>
   );
 }

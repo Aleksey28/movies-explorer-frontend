@@ -2,7 +2,7 @@ import React from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({ moviesCards, usersMoviesCards, countCards, onSaveMovieCard, onDeleteMovieCard }) {
+function MoviesCardList({ moviesCards = [], usersMoviesCards, countCards, onSaveMovieCard, onDeleteMovieCard }) {
   const cardElements = moviesCards.slice(0, Math.min(moviesCards.length, countCards))
     .map((item) => (
       <li key={item.movieId}>
@@ -13,7 +13,7 @@ function MoviesCardList({ moviesCards, usersMoviesCards, countCards, onSaveMovie
           onDeleteMovieCard={onDeleteMovieCard}/>
       </li>
     ));
-  return cardElements.length > 0
+  return ((moviesCards && moviesCards.length) || 0) > 0
          ? <ul className="cards">{cardElements}</ul>
          : <p className="cards__not-found">Ничего не найдено</p>;
 
