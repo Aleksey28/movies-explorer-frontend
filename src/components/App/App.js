@@ -30,10 +30,12 @@ function App() {
   const { pathname } = useLocation();
   const [error, setError] = useState({});
   const [informationPopupOpenMessage, setInformationPopupMessage] = useState("");
+  const [firstPath, setFirstPath] = useState("/");
   const history = useHistory();
 
   //Эффект при монтировании. Проверяем авторизацию пользователя и достаем из временного хранилища фильмы, если они есть.
   useEffect(() => {
+    setFirstPath(pathname);
     setIsLoading(true);
     MainApi
       .getUserData()
@@ -337,7 +339,7 @@ function App() {
           <ProtectedRoute path="/profile" condition={loggedIn} to="/signin">
             <Profile onUpdateUser={handleUpdateUser} onExit={handleExit}/>
           </ProtectedRoute>
-          <ProtectedRoute path="/signin" condition={!loggedIn} to="/">
+          <ProtectedRoute path="/signin" condition={!loggedIn} to={firstPath || "/"}>
             <Login onAuthorization={handleAuthorization}/>
           </ProtectedRoute>
           <ProtectedRoute path="/signup" condition={!loggedIn} to="/">

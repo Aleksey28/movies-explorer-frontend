@@ -10,6 +10,7 @@ export const PROPS_PROFILE = {
   validators: {
     name: {
       required: (value) => {
+        debugger;
         return {
           valid: !!value,
           message: "Вы пропустили это поле.",
@@ -17,8 +18,8 @@ export const PROPS_PROFILE = {
       },
       minLength: (value) => {
         return {
-          valid: value.length > 1,
-          message: `Минимальное количество символов: 2. Длина текста сейчас: ${value.length} символ.`,
+          valid: value && value.length > 1,
+          message: `Минимальное количество символов: 2. Длина текста сейчас: ${(value && value.length) || 0} символ.`,
         };
       },
       mask: (value) => {
@@ -178,7 +179,7 @@ export const MAIN_API_SETTINGS = {
   headers: {
     "Content-Type": "application/json",
   },
-  credentials: "include"
+  credentials: "include",
 };
 
 export const SHORT_MOVIE_MINUTES = 40;
