@@ -15,6 +15,7 @@ import MoviesApi from "../../utils/MoviesApi";
 import MainApi from "../../utils/MainApi";
 import { MOVIES_API_SETTINGS } from "../../utils/constants";
 import Preloader from "../Preloader/Preloader";
+import InformationPopup from "../InformationPopup/InformationPopup";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -28,6 +29,7 @@ function App() {
   const [usersMovieSearchText, setUsersMovieSearchText] = useState("");
   const { pathname } = useLocation();
   const [error, setError] = useState({});
+  const [informationPopupOpenMessage, setInformationPopupMessage] = useState("");
   const history = useHistory();
 
   //Эффект при монтировании. Проверяем авторизацию пользователя и достаем из временного хранилища фильмы, если они есть.
@@ -141,6 +143,7 @@ function App() {
     MainApi.setUserData(data)
       .then((res) => {
         setCurrentUser(res);
+        setInformationPopupMessage("Данные изменены");
       })
       .catch(({ status, message }) => {
         setError({ status, message });
@@ -288,6 +291,10 @@ function App() {
     return false;
   });
 
+  const handleSubmitInformationPopup = () => {
+    setInformationPopupMessage("");
+  };
+
   return (
     <CurrentUserContext.Provider value={{ ...currentUser }}>
       <div className="page">
@@ -352,6 +359,7 @@ function App() {
           </Route>
         </Switch>
         {isLoading && <Preloader/>}
+        <InformationPopup message={informationPopupOpenMessage} onSubmit={handleSubmitInformationPopup}/>
       </div>
     </CurrentUserContext.Provider>
   );
