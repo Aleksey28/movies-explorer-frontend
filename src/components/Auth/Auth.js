@@ -9,6 +9,7 @@ function Auth({
   name,
   validators,
   defaultValues,
+  onlyDifferent,
   inputsList = [],
   submitText,
   footerData,
@@ -44,6 +45,7 @@ function Auth({
       onSubmit={onSubmit}
       validators={validators}
       defaultValues={defaultValues}
+      onlyDifferent={onlyDifferent}
       isOpen={true}
     >
       <Logo elementClass="auth__logo"/>

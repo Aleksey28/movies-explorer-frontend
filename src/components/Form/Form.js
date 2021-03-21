@@ -9,6 +9,7 @@ export default function Form({
   validators,
   onSubmit,
   defaultValues,
+  onlyDifferent = true,
   children,
 }) {
 
@@ -90,8 +91,8 @@ export default function Form({
       }
     }
     setIsInvalid(Object.keys(formValues).length !== Object.keys(formErrors).length);
-    setIsInvalid(Object.keys(formValues).every(key => formValues[key] === defaultValues[key]));
-  }, [formValues, formErrors, defaultValues]);
+    setIsInvalid(Object.keys(formValues).every(key => formValues[key] === defaultValues[key]) && onlyDifferent);
+  }, [formValues, formErrors, defaultValues, onlyDifferent]);
 
   //Заполняем контекст формы
   const formContextValue = { onChangeInput, isInvalid, formErrors, showErrors, formValues };

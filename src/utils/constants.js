@@ -51,9 +51,10 @@ export const PROPS_LOGIN = {
     { name: "password", label: "Пароль", type: "password" },
   ],
   defaultValues: {
-    password: "",
-    email: "",
+    password: "12345qwert",
+    email: "guest@email.ru",
   },
+  onlyDifferent: false,
   title: "Рады видеть!",
   name: "login",
   submitText: "Войти",
