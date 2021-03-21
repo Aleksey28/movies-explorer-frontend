@@ -14,7 +14,7 @@ function Header({ loggedIn }) {
       <Logo elementClass="header__logo"/>
       {loggedIn
        ? <>
-         <Navigation openNavigation={openNavigation}/>
+         <Navigation openNavigation={openNavigation} onCloseNavigation={handleClickOnNavSwitch}/>
          <button className={`header__switch-menu ${openNavigation && "header__switch-menu_opened"}`}
                  onClick={handleClickOnNavSwitch}/>
        </>

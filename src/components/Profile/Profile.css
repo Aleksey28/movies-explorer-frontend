@@ -50,6 +50,7 @@
   font-style: normal;
   line-height: 13px;
   color: #fff;
+  margin-right: 20px;
 }
 
 .profile__input {
@@ -58,11 +59,16 @@
   font-weight: normal;
   font-style: normal;
   line-height: 13px;
+  flex-grow: 1;
   padding: 0;
   text-align: right;
   color: #fff;
   border: none;
   background: none;
+}
+
+.profile__input_error {
+  color: #ee3465;
 }
 
 .profile__error {
@@ -76,6 +82,10 @@
   margin-top: 3px;
   text-align: right;
   color: #ee3465;
+}
+
+.profile__error_visible {
+  visibility: visible;
 }
 
 .profile__btn {
@@ -106,6 +116,12 @@
 .profile__btn_type_exit {
   font-weight: 500;
   color: #ee3465;
+}
+
+.profile__btn_disabled {
+  user-select: none;
+  pointer-events: none;
+  opacity: .2;
 }
 
 @media screen and (max-width: 768px) {

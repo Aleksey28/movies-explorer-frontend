@@ -8,6 +8,16 @@
   gap: 31px 28px;
 }
 
+.cards__not-found {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 28px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 30px;
+  margin: auto;
+  color: #fff;
+}
+
 @media screen and (max-width: 768px) {
   .cards {
     grid-template-columns: 1fr 1fr;
@@ -17,8 +27,8 @@
 
 @media screen and (max-width: 500px) {
   .cards {
+    padding-top: 36px;
     grid-template-columns: 1fr;
     row-gap: 13px;
-    padding-top: 36px;
   }
 }

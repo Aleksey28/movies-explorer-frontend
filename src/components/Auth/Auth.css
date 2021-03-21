@@ -68,6 +68,10 @@
   background: #2f2f2f;
 }
 
+.auth__input_error {
+  color: #ee3465;
+}
+
 .auth__error {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 10px;
@@ -76,6 +80,10 @@
   line-height: 12px;
   visibility: hidden;
   color: #ee3465;
+}
+
+.auth__error_visible {
+  visibility: visible;
 }
 
 .auth__submit {
@@ -98,6 +106,13 @@
 
 .auth__submit:hover {
   opacity: .8;
+}
+
+
+.auth__submit_disabled {
+  user-select: none;
+  pointer-events: none;
+  opacity: .2;
 }
 
 .auth__footer {

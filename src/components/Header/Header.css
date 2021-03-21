@@ -95,7 +95,7 @@
   }
 
   .header__switch-menu {
-    position: absolute;
+    position: fixed;
     right: calc((100vw - 400px) / (768 - 400) * (30 - 23) + 23px);
     display: block;
     width: calc((100vw - 400px) / (768 - 400) * (44 - 22) + 22px);

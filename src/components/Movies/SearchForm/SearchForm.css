@@ -44,13 +44,13 @@
   min-width: 100px;
   margin: 9px;
   padding: 17px 20px;
+  cursor: pointer;
+  transition: opacity ease-in .2s;
   text-align: center;
   color: #fff;
   border: none;
   border-radius: 5px;
   background: #4285f4;
-  transition: opacity ease-in .2s;
-  cursor: pointer;
 }
 
 .search__btn:hover {
@@ -73,10 +73,10 @@
   height: 20px;
   margin-right: 14px;
   padding: 2px;
+  cursor: pointer;
+  transition: opacity ease-in .2s;
   border-radius: 20px;
   background: #343434;
-  transition: opacity ease-in .2s;
-  cursor: pointer;
 }
 
 .search__visible-filter:hover {
